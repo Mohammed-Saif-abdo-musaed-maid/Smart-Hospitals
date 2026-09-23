@@ -7,8 +7,8 @@
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{__('Dashboard')}}</a></li>
+    <li class="active">{{__('Here')}}</li>
 </ol>
 @endsection
 
@@ -22,14 +22,14 @@
         @if (session()->has('regpsuccess'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-check"></i> Success!</h4>
+            <h4><i class="icon fa fa-check"></i> {{__('Success!')}}</h4>
             {{session()->get('regpsuccess')}}
         </div>
         @endif
         @if (session()->has('regpfail'))
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-ban"></i> Error!</h4>
+            <h4><i class="icon fa fa-ban"></i> {{__('Error!')}}</h4>
             {{session()->get('regpfail')}}
         </div>
         @endif
@@ -62,7 +62,7 @@
                 <label for="inputEmail3" class="col-sm-2 control-label">{{__('Full Name')}}<span style="color:red">*</span></label>
                 <div class="col-sm-10">
                     <input type="text" required readonly class="form-control" name="reg_pname" id="patient_name"
-                        placeholder="Enter Patient Full Name">
+                        placeholder="{{ __('Enter Patient Full Name') }}">
                 </div>
             </div>
 
@@ -70,7 +70,7 @@
                 <label for="inputEmail3" class="col-sm-2 control-label">{{__('NIC Number')}}<span style="color:red">*</span></label>
                 <div class="col-sm-10">
                     <input type="text" required readonly class="form-control" name="reg_pnic" id="patient_nic"
-                        placeholder="National Identity Card Number">
+                        placeholder="{{ __('National Identity Card Number') }}">
                 </div>
             </div>
 
@@ -78,7 +78,7 @@
                 <label for="inputPassword3" class="col-sm-2 control-label">{{__('Address')}}<span style="color:red">*</span></label>
                 <div class="col-sm-10">
                     <input type="text" required readonly class="form-control" name="reg_paddress" id="patient_address"
-                        placeholder="Enter Patient Address ">
+                        placeholder="{{ __('Enter Patient Address ') }}">
                 </div>
             </div>
 
@@ -86,7 +86,7 @@
                 <label for="inputPassword3" class="col-sm-2 control-label">{{__('Telephone')}}</label>
                 <div class="col-sm-10">
                     <input type="tel" readonly class="form-control" name="reg_ptel" id="patient_telephone"
-                        placeholder="Patient Telephone Number">
+                        placeholder="{{ __('Patient Telephone Number') }}">
                 </div>
             </div>
 
@@ -94,7 +94,7 @@
                 <label for="inputPassword3" class="col-sm-2 control-label">{{__('Occupation')}}<span style="color:red">*</span></label>
                 <div class="col-sm-10">
                     <input type="text" required readonly class="form-control" name="reg_poccupation"
-                        id="patient_occupation" placeholder="Enter Patient Occupation ">
+                        id="patient_occupation" placeholder="{{ __('Enter Patient Occupation ') }}">
                 </div>
             </div>
 
@@ -103,14 +103,14 @@
                 <label class="col-sm-2 control-label">{{__('Sex')}}<span style="color:red">*</span></label>
                 <div class="col-sm-2">
                     <select required disabled class="form-control" name="reg_psex" id="patient_sex">
-                        <option value="Male">Male</option>
-                        <option value="Female">Female</option>
+                        <option value="Male">{{__('Male')}}</option>
+                        <option value="Female">{{__('Female')}}</option>
                     </select>
                 </div>
                 <label for="patient_age" class="col-sm-2 control-label">{{__('Age')}}</label>
                 <div class="col-sm-2">
                     <input type="text" readonly class="form-control" name="reg_page" id="patient_age"
-                        placeholder="Enter Age">
+                        placeholder="{{ __('Enter Age') }}">
                 </div>
             </div>
 
@@ -118,8 +118,8 @@
                 <label class="col-sm-2 control-label">{{__('Civil Condition')}}<span style="color:red">*</span></label>
                 <div class="col-sm-2">
                     <select required class="form-control" name="reg_ipcondition">
-                        <option value="Single">Single</option>
-                        <option value="Married">Married</option>
+                        <option value="Single">{{__('Single')}}</option>
+                        <option value="Married">{{__('Married')}}</option>
                     </select>
                 </div>
             </div>
@@ -127,7 +127,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">{{__('Birth Place')}}</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="reg_ipbirthplace" placeholder="Patient Birth place">
+                    <input type="text" class="form-control" name="reg_ipbirthplace" placeholder="{{ __('Patient Birth place') }}">
                 </div>
             </div>
 
@@ -135,12 +135,12 @@
                 <label class="col-sm-2 control-label">{{__('Nationality')}}<span style="color:red">*</span></label>
                 <div class="col-sm-2">
                     <select required class="form-control" name="reg_ipnation">
-                        <option selected value="Sinhala">Sinhala</option>
-                        <option value="Tamil">Tamil</option>
-                        <option value="Muslim">Muslim</option>
-                        <option value="Burgher">Burgher</option>
-                        <option value="Malay">Malay</option>
-                        <option value="other">other</option>
+                        <option selected value="Sinhala">{{__('Sinhala')}}</option>
+                        <option value="Tamil">{{__('Tamil')}}</option>
+                        <option value="Muslim">{{__('Muslim')}}</option>
+                        <option value="Burgher">{{__('Burgher')}}</option>
+                        <option value="Malay">{{__('Malay')}}</option>
+                        <option value="other">{{__('other')}}</option>
                     </select>
                 </div>
             </div>
@@ -149,11 +149,11 @@
                 <label class="col-sm-2 control-label">{{__('Religion')}}<span style="color:red">*</span></label>
                 <div class="col-sm-2">
                     <select required class="form-control" name="reg_ipreligion">
-                        <option selected value="Buddhism">Buddhism</option>
-                        <option value="Hinduism">Hinduism</option>
-                        <option value="Islam">Islam</option>
-                        <option value="Christianity">Christianity</option>
-                        <option value="other">other</option>
+                        <option selected value="Buddhism">{{__('Buddhism')}}</option>
+                        <option value="Hinduism">{{__('Hinduism')}}</option>
+                        <option value="Islam">{{__('Islam')}}</option>
+                        <option value="Christianity">{{__('Christianity')}}</option>
+                        <option value="other">{{__('other')}}</option>
                     </select>
                 </div>
             </div>
@@ -174,7 +174,7 @@
                 <label class="col-sm-2 control-label">{{__('Name of Patient/Guardian')}}<span style="color:red">*</span></label>
                 <div class="col-sm-10">
                     <input type="text" required class="form-control" name="reg_ipguardname"
-                        placeholder="Enter Name of any responsible person of patient">
+                        placeholder="{{ __('Enter Name of any responsible person of patient') }}">
                 </div>
             </div>
 
@@ -182,7 +182,7 @@
                 <label class="col-sm-2 control-label">{{__('Address of Patient/Guardian')}}<span style="color:red">*</span></label>
                 <div class="col-sm-10">
                     <input type="text" required class="form-control" name="reg_ipguardaddress"
-                        placeholder="Enter Address of any responsible person of patient">
+                        placeholder="{{ __('Enter Address of any responsible person of patient') }}">
                 </div>
             </div>
 
@@ -190,7 +190,7 @@
                 <label class="col-sm-2 control-label">{{__('Inventory of patient')}}</label>
                 <div class="col-sm-10">
                     <textarea class="form-control" name="reg_ipinventory" rows="3" cols="100"
-                        placeholder="Enter inventory list of patient"></textarea>
+                        placeholder="{{ __('Enter inventory list of patient') }}"></textarea>
                 </div>
             </div>
         </div>
@@ -205,7 +205,7 @@
                 <label class="col-sm-2 control-label">{{__('Ward No')}}<span style="color:red">*</span></label>
                 <div class="col-sm-2">
                     <select required class="form-control" name="reg_ipwardno">
-                        <option value="">Select Ward No</option>
+                        <option value="">{{__('Select Ward No')}}</option>
                         @if($data)
                         @foreach ($data as $x)
                                 <option value="{{$x->ward_no}}">{{$x->ward_no}} ({{ucwords($x->name)}})</option>
@@ -219,7 +219,7 @@
                 <label class="col-sm-2 control-label">{{__('House Physician/Surgeon')}}<span style="color:red">*</span></label>
                 <div class="col-sm-10">
                     <input type="text" required class="form-control" name="reg_iphousedoc"
-                        placeholder="Name of Physician/Surgeon">
+                        placeholder="{{ __('Name of Physician/Surgeon') }}">
                 </div>
             </div>
 
@@ -227,7 +227,7 @@
                 <label class="col-sm-2 control-label">{{__('Approved Physician/Surgeon')}}<span style="color:red">*</span></label>
                 <div class="col-sm-10">
                     <input type="text" required class="form-control" name="reg_ipapprovedoc" id="approveDoc"
-                        placeholder="Name of Physician/Surgeon">
+                        placeholder="{{ __('Name of Physician/Surgeon') }}">
                 </div>
             </div>
 
@@ -242,7 +242,7 @@
             <div class="form-group">
                 <label for="dis1" class="col-sm-2 control-label">{{__('Disease')}}<span style="color:red">*</span></label>
                 <div class="col-sm-10">
-                    <input type="text" required class="form-control" id="dis1" placeholder="Enter diagnosis of patient"
+                    <input type="text" required class="form-control" id="dis1" placeholder="{{ __('Enter diagnosis of patient') }}"
                     name="reg_admitofficer1" />
                 </div>
             </div>
@@ -262,14 +262,14 @@
                 <label for="dis3" class="col-sm-2 control-label">{{__('Mode of arises and current condition:')}}<span style="color:red">*</span></label>
                 <div class="col-sm-10">
                     <textarea class="form-control" required name="reg_admitofficer3" id="dis3" rows="3" cols="100"
-                        placeholder="Enter current condition of patient here"></textarea>
+                        placeholder="{{ __('Enter current condition of patient here') }}"></textarea>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="dis4" class="col-sm-2 control-label">{{__('Certified by')}}<span style="color:red">*</span></label>
                 <div class="col-sm-2">
-                    <input type="text" readonly value="{{Auth::user()->id}} ({{ucWords(Auth::user()->name)}})" required class="form-control" id="dis4" placeholder="Select Your ID here"
+                    <input type="text" readonly value="{{Auth::user()->id}} ({{ucWords(Auth::user()->name)}})" required class="form-control" id="dis4" placeholder="{{ __('Select Your ID here') }}"
                         name="reg_admitofficer4" />
                 </div>
             </div>
@@ -277,8 +277,8 @@
         <!-- /.box-body -->
 
         <div class="box-footer">
-            <input type="submit" class="btn btn-info pull-right" value="Register">
-            <input type="reset" class="btn btn-default" value="Cancel">
+            <input type="submit" class="btn btn-info pull-right" value="{{ __('Register') }}">
+            <input type="reset" class="btn btn-default" value="{{ __('Cancel') }}">
         </div>
 
 </div>
@@ -298,7 +298,7 @@
         <div class="form-group">
             <label for="pID" class="control-label" style="font-size:18px">{{__('Registration No or Appointment No:')}}</label>
                 <input type="number" required class="form-control" onchange="registerinpatientfunction()" id="pID"
-                    placeholder="Enter Registration No" />
+                    placeholder="{{ __('Enter Registration No') }}" />
         </div>
         <div class="form-group">
                 <button type="button" class="btn btn-info" onclick="registerinpatientfunction()">{{__('Enter')}}</button>
@@ -356,12 +356,12 @@
 
                     }else{
                         console.log('not found');
-                        alert("Please Enter a Valid Admitted Patient Registration Number or Appointment Number!");
+                        alert("{{ __('Please Enter a Valid Admitted Patient Registration Number or Appointment Number!') }}");
                     }
                 }
             });
             }else{
-                alert("Please Enter a Valid Registration Number!");
+                alert("{{ __('Please Enter a Valid Registration Number!') }}");
             }
     }
 

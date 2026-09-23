@@ -15,7 +15,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
+        $this->middleware('auth', ['except' => ['setLocale']]);
     }
 
     /**
@@ -66,7 +66,10 @@ class HomeController extends Controller
 
     public function setLocale($lan)
     {
-        \Session::put('locale', $lan);
+        if (in_array($lan, ['en', 'si', 'ar'])) {
+            \Session::put('locale', $lan);
+        }
+
         return redirect()->back();
     }
 }

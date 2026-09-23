@@ -134,7 +134,7 @@ class ReportController extends Controller
         }
 
 
-        if ($request->type == "My Attendance") {
+        elseif ($request->type == "My Attendance") {
 
             $data = DB::table('attendances')
                 ->join('users', 'attendances.user_id', '=', 'users.id')
@@ -156,7 +156,7 @@ class ReportController extends Controller
         }
 
 
-        if ($request->type == "Doctors") {
+        elseif ($request->type == "Doctors") {
             $data = DB::table('attendances')
                 ->join('users', 'attendances.user_id', '=', 'users.id')
                 ->select(
@@ -175,7 +175,7 @@ class ReportController extends Controller
         }
 
 
-        if ($request->type == "General Staff") {
+        elseif ($request->type == "General Staff") {
             $data = DB::table('attendances')
                 ->join('users', 'attendances.user_id', '=', 'users.id')
                 ->select(
@@ -192,6 +192,8 @@ class ReportController extends Controller
                 ->groupBy('id')
                 // ->where('users.user_type','pharmacist')
                 ->get();
+        } else {
+            $data = collect();
         }
 
         return view('reports/attendance-reports/all_attendance_report', ['title' => $user->name, 'details' => $data, 'start' => $request->start, 'end' => $request->end, 'type' => $request->type]);
@@ -223,7 +225,7 @@ class ReportController extends Controller
         }
 
         //get the attendance of mine
-        if ($request->type == "My") {
+        if ($request->type == "My Attendance") {
             $data = DB::table('attendances')
                 ->join('users', 'attendances.user_id', '=', 'users.id')
                 ->select(
@@ -261,7 +263,7 @@ class ReportController extends Controller
         }
 
         //get the attendance of staff
-        if ($request->type == "General") {
+        if ($request->type == "General Staff") {
             $data = DB::table('attendances')
                 ->join('users', 'attendances.user_id', '=', 'users.id')
                 ->select(

@@ -8,8 +8,8 @@
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{ __('Dashboard') }}</a></li>
+    <li class="active">{{ __('Here') }}</li>
 </ol>
 @endsection
 
@@ -22,14 +22,14 @@
         @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-check"></i> Success!</h4>
+            <h4><i class="icon fa fa-check"></i> {{ __('Success!') }}</h4>
             {{session()->get('success')}}
         </div>
         @endif
         @if (session()->has('fail'))
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-ban"></i> Error!</h4>
+            <h4><i class="icon fa fa-ban"></i> {{ __('Error!') }}</h4>
 
             {{session()->get('fail')}}
         </div>
@@ -49,7 +49,7 @@
                         <div class="col-sm-10">
                             <input type="number" name="userid"
                                 class="form-control @error('userid') border border-danger @enderror" id="userid"
-                                value="{{ old('userid') }}" placeholder="User ID">
+                                value="{{ old('userid') }}" placeholder="{{ __('User ID') }}">
                             @error('userid')
                             <span class="text-danger text-capitalize invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
@@ -63,7 +63,7 @@
                         <div class="col-sm-10">
                             <input type="number" name="fingerid"
                                 class="form-control @error('fingerid') border border-danger @enderror"
-                                value="{{ old('fingerid') }}" id="fingerid" placeholder="Fingerprint ID">
+                                value="{{ old('fingerid') }}" id="fingerid" placeholder="{{ __('Fingerprint ID') }}">
                             @error('fingerid')
                             <span class="text-danger text-capitalize invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>

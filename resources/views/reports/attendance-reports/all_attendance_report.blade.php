@@ -2,13 +2,13 @@
 
 @section('title', $title)
 
-@section('content_title',"Attendance Report")
-@section('content_description',"Generate Your Report Here...")
+@section('content_title',__("Attendance Report"))
+@section('content_description',__("Generate Your Report Here..."))
 @section('breadcrumbs')
 
     <ol class="breadcrumb">
-        <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-        <li class="active">Here</li>
+        <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{ __('Dashboard') }}</a></li>
+        <li class="active">{{ __('Here') }}</li>
     </ol>
 @endsection
 
@@ -17,7 +17,7 @@
     $name = $user->name;
     $user_type = $user->user_type;
     $image_path = $user->img_path;
-    $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
+    $outlet = 'مستشفى الشفاء'?>
 
     <section class="content">
 
@@ -33,10 +33,10 @@
                                    aria-describedby="example1_info">
                                 <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Type</th>
-                                    <th>Attend Dates</th>
-                                    <th>Short Leave</th>
+                                    <th>{{ __('Name') }}</th>
+                                    <th>{{ __('Type') }}</th>
+                                    <th>{{ __('Attend Dates') }}</th>
+                                    <th>{{ __('Short Leave') }}</th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -50,10 +50,10 @@
                                 @endforeach
                                 </tbody>
                                 <tfoot>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Attend Dates</th>
-                                <th>Short Leave</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Type') }}</th>
+                                <th>{{ __('Attend Dates') }}</th>
+                                <th>{{ __('Short Leave') }}</th>
                                 </tfoot>
 
                             </table>
@@ -67,10 +67,10 @@
                 <div class="col-md-3">
                     <form action="{{route('all_print_preview')}}" method="get">
                         {{csrf_field()}}
-                        <button type="submit" class="btnprn btn btn-danger">Print Preview</button>
-                        <input type="text" name="start" value={{$start}} style="display:none">
-                        <input type="text" name="end" value={{$end}} style="display:none">
-                        <input type="text" name="type" value={{$type}} style="display:none">
+                        <button type="submit" class="btnprn btn btn-danger">{{ __('Print Preview') }}</button>
+                        <input type="text" name="start" value="{{$start}}" style="display:none">
+                        <input type="text" name="end" value="{{$end}}" style="display:none">
+                        <input type="text" name="type" value="{{$type}}" style="display:none">
                     </form>
                 </div>
             </div>

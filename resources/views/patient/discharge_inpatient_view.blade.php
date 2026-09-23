@@ -7,8 +7,8 @@
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{__('Dashboard')}}</a></li>
+    <li class="active">{{__('Here')}}</li>
 </ol>
 @endsection
 
@@ -22,14 +22,14 @@
         @if (session()->has('regpsuccess'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-check"></i> Success!</h4>
+            <h4><i class="icon fa fa-check"></i> {{__('Success!')}}</h4>
             {{session()->get('regpsuccess')}}
         </div>
         @endif
         @if (session()->has('regpfail'))
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-ban"></i> Error!</h4>
+            <h4><i class="icon fa fa-ban"></i> {{__('Error!')}}</h4>
             {{session()->get('regpfail')}}
         </div>
         @endif
@@ -66,7 +66,7 @@
                 <label for="patient_name" class="col-sm-2 control-label">{{__('Name')}}</label>
                 <div class="col-sm-10">
                     <input type="text" required readonly class="form-control" name="reg_pname" id="patient_name"
-                        placeholder="Enter Patient Full Name">
+                        placeholder="{{ __('Enter Patient Full Name') }}">
                 </div>
             </div>
 
@@ -74,7 +74,7 @@
                 <label for="patient_address" class="col-sm-2 control-label">{{__('Address')}}</label>
                 <div class="col-sm-10">
                     <input type="text" required readonly class="form-control" name="reg_paddress" id="patient_address"
-                        placeholder="Enter Patient Address ">
+                        placeholder="{{ __('Enter Patient Address ') }}">
                 </div>
             </div>
 
@@ -82,7 +82,7 @@
                 <label for="patient_telephone" class="col-sm-2 control-label">{{__('Telephone')}}</label>
                 <div class="col-sm-10">
                     <input type="tel" readonly class="form-control" name="reg_ptel" id="patient_telephone"
-                        placeholder="Patient Telephone Number">
+                        placeholder="{{ __('Patient Telephone Number') }}">
                 </div>
             </div>
 
@@ -90,7 +90,7 @@
                 <label for="inputEmail" class="col-sm-2 control-label">{{__('Description:')}}</label>
                 <div class="col-sm-10">
                     <textarea required class="form-control" name="reg_medicalofficer1" rows="3" cols="100"
-                        placeholder="Enter abstract condition of patient here"></textarea>
+                        placeholder="{{ __('Enter abstract condition of patient here') }}"></textarea>
                 </div>
             </div>
 
@@ -98,13 +98,13 @@
                 <label for="medofs2" class="col-sm-2 control-label">{{__('Certified by')}}</label>
                 <div class="col-sm-10" id="al-box">
                     <input type="text" readonly value="{{Auth::user()->id}} ({{ucWords(Auth::user()->name)}})" required class="form-control" id="medofs2" name="reg_medicalofficer2"
-                        placeholder="Select Your ID here" />
+                        placeholder="{{ __('Select Your ID here') }}" />
                 </div>
             </div>
 
             <div class="box-footer">
-                <input type="submit" class="btn pull-right mt-5 mb-2 btn-lg btn-success" value="Submit & Print">
-                <input type="reset" class="btn pull-left mt-5 mb-2 btn-lg btn-info" value="Cancel">
+                <input type="submit" class="btn pull-right mt-5 mb-2 btn-lg btn-success" value="{{ __('Submit & Print') }}">
+                <input type="reset" class="btn pull-left mt-5 mb-2 btn-lg btn-info" value="{{ __('Cancel') }}">
             </div>
 
         </div>
@@ -124,7 +124,7 @@
         <div class="form-group">
             <label for="pid" class="control-label" style="font-size:18px">{{__('Registration No:')}}</label>
             <input type="number" required class="form-control" onchange="dischargeinpatientfunction()" id="pid"
-                    placeholder="Enter Registration No" />
+                    placeholder="{{ __('Enter Registration No') }}" />
         </div>
         <div class="form-group">
             <button type="button" class="btn btn-info" onclick="dischargeinpatientfunction()">{{__('Enter')}}</button>
@@ -175,12 +175,12 @@
                         console.log('whyyyyy');
                     }else{
                         console.log('not found');
-                        alert("Please Enter a Valid In Patient Registration Number!");
+                        alert("{{ __('Please Enter a Valid In Patient Registration Number!') }}");
                     }
                 }
             });
             }else{
-                alert("Please Enter a Valid Registration Number!");
+                alert("{{ __('Please Enter a Valid Registration Number!') }}");
             }    
     }
 

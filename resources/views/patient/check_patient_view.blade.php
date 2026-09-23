@@ -10,8 +10,8 @@
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{__('Dashboard')}}</a></li>
+    <li class="active">{{__('Here')}}</li>
 </ol>
 @endsection
 @section('main_content')
@@ -28,42 +28,42 @@
     <div class="col-md-6">
         <div style="height:46.5vh;overflow-y:scroll;overflow-x:hidden;" class="mt-2 mb-1 box box-dark">
             <div class="box-header with-border">
-                <h3 class="box-title"> <i class="fas fa-notes-medical"></i>&nbsp;Channel & Patient's Details</h3>
+                <h3 class="box-title"> <i class="fas fa-notes-medical"></i>&nbsp;{{__('Channel & Patient\'s Details')}}</h3>
             </div>
             <div class="box-body">
-                <h4>Appointment Number : {{$appNum}}</h4>
-                <h4>Name : {{$pName}}</h4>
-                <h4>Age & Sex : {{$pAge}} {{$pSex}}</h4>
+                <h4>{{__('Appointment Number')}} : {{$appNum}}</h4>
+                <h4>{{__('Name')}} : {{$pName}}</h4>
+                <h4>{{__('Age & Sex')}} : {{$pAge}} {{$pSex}}</h4>
                 @if ($pBloodPressure->flag)
-                <h4>Blood Pressure : <span
+                <h4>{{__('Blood Pressure')}} : <span
                         class="h4 @if ($pBloodPressure->sys>130 || $pBloodPressure->dia>90) text-red @elseif ($pBloodPressure->sys>125 || $pBloodPressure->dia>85) text-yellow @else text-green @endif ">
                         {{$pBloodPressure->sys}}/{{$pBloodPressure->dia}}
-                        mmHg</span><small> (Updated
+                        mmHg</span><small> ({{__('Updated')}}
                         {{explode(" ",$pBloodPressure->date)[0]}})</small></h4>
                 @endif
 
                 @if($pBloodSugar->flag)
-                <h4>Blood Glucose Levels : <span
+                <h4>{{__('Blood Glucose Levels')}} : <span
                         class="h4 @if($pBloodSugar->value > 72 && $pBloodSugar->value<100) text-green @else text-red @endif">{{$pBloodSugar->value}}
-                        mg/dL</span><small> (Updated
+                        mg/dL</span><small> ({{__('Updated')}}
                         {{explode(" ",$pBloodSugar->date)[0]}})</small></h4>
                 @endif
 
                 @if ($pCholestrol->flag)
-                <h4>General Cholestrol Level : <span
+                <h4>{{__('General Cholestrol Level')}} : <span
                         class="h4 @if($pCholestrol->value>220) text-red @elseif($pCholestrol->value>200) text-yellow @else text-green @endif">{{$pCholestrol->value}}
                         mg/dL</span><small>
-                        (Updated {{explode(" ",$pCholestrol->date)[0]}})</small></h4>
+                        ({{__('Updated')}} {{explode(" ",$pCholestrol->date)[0]}})</small></h4>
                 @endif
                 <div class="row mt-2 mb-0 pb-0">
                     <div class="col-md-3 mt-2 mb-0 pb-0">
                         <button onclick="window.open('{{route('patientHistory',$pid)}}','myWin','scrollbars=yes,width=720,height=690,location=no').focus();" class="btn btn-info">
-                            View Patient History
+                            {{__('View Patient History')}}
                         </button>
                     </div>
                     <div class="col-md-3 mt-2 mb-0 pb-0">
                         <button data-toggle="modal" data-target="#modal-clinics" class="btn btn-primary">
-                            Assign To Clinic
+                            {{__('Assign To Clinic')}}
                         </button>
                     </div>
                 </div>
@@ -114,10 +114,10 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span></button>
-                    <h3 class="modal-title">Assign To Clinics</h3>
+                    <h3 class="modal-title">{{__('Assign To Clinics')}}</h3>
                 </div>
                 <div id="clinics" class="modal-body">
-                    <h4>This Patient Is Already Assigned To </h4>
+                    <h4>{{__('This Patient Is Already Assigned To')}} </h4>
                     <div id="already">
                         @foreach ($assinged_clinics as $clinic)
                         <span style="font-size:15px;display:inline-block"
@@ -128,7 +128,7 @@
 
                         <form action="{{route('addToClinic')}}" method="POST" id="clinic-form">
                             <input type="hidden" name="pid" value="{{$pid}}">
-                            <h4 for="clinic">Assign To a New Clinic <small>( CTRL+Click To Select Multiple )</small>
+                            <h4 for="clinic">{{__('Assign To a New Clinic')}} <small>( {{__('CTRL+Click To Select Multiple')}} )</small>
                             </h4>
                             <select class="form-control" name="clinic[]" multiple id="clinic">
 
@@ -152,8 +152,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="reset" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Save Changes</button>
+                    <button type="reset" class="btn btn-default pull-left" data-dismiss="modal">{{__('Close')}}</button>
+                    <button type="submit" class="btn btn-primary">{{__('Save Changes')}}</button>
                 </div>
                 </form>
             </div>
@@ -167,7 +167,7 @@
 
         <div style="height:46.5vh;" class="box box-dark mb-1 mt-2">
             <div class="box-header with-border">
-                Add Medicines To Prescription
+                {{__('Add Medicines To Prescription')}}
             </div>
             <div class="box-body">
                 <div class="container-fluid">
@@ -175,12 +175,12 @@
                         <div class="col-md-5 m-0 p-0">
                             <div id="bloodhound">
                                 <input oninput="console.log(this.value);" id="medSearch" class="form-control"
-                                    type="text" placeholder="Search Medicines">
+                                    type="text" placeholder="{{ __('Search Medicines') }}">
                             </div>
                         </div>
                         <div class="col-md-7 m-0 p-0">
                             <input onkeydown="addMed(event,this)" id="medNote" disabled type="text" class="form-control"
-                                placeholder="Notes">
+                                placeholder="{{ __('Notes') }}">
                         </div>
                         <div id="suggestionList"></div>
                     </div>
@@ -200,8 +200,8 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Medicine</th>
-                                <th>Notes</th>
+                                <th>{{__('Medicine')}}</th>
+                                <th>{{__('Notes')}}</th>
                                 <th></th>
                             </tr>
                         </thead>
@@ -360,7 +360,7 @@
     <div class="col-md-12">
         <div class="box mt-2 box-dark">
             <div class="box-header with-border">
-                <p class="h4 m-0">Patient Diagnosis</p>
+                <p class="h4 m-0">{{__('Patient Diagnosis')}}</p>
             </div>
             <div class="row">
                 <div class="col-md-5">
@@ -372,17 +372,17 @@
                     </div>
                 </div>
                 <div class="col-md-5 pl-5 pr-5">
-                    <label class="mt-3" for="">Blood Pressure</label>
+                    <label class="mt-3" for="">{{__('Blood Pressure')}}</label>
                     <div class="input-group">
                         <input id="pressure" name="pressure" type="text" class="form-control">
                         <span class="input-group-addon">mmHg</span>
                     </div>
-                    <label class="mt-3" for="">Blood Glucose Level</label>
+                    <label class="mt-3" for="">{{__('Blood Glucose Level')}}</label>
                     <div class="input-group">
                         <input id="glucose" type="text" class="form-control">
                         <span class="input-group-addon">mg/dL</span>
                     </div>
-                    <label class="mt-3" for="">General Cholestrol Level</label>
+                    <label class="mt-3" for="">{{__('General Cholestrol Level')}}</label>
                     <div class="input-group">
                         <input id="cholestrol" type="text" class="form-control">
                         <span class="input-group-addon">mg/dL</span>
@@ -390,21 +390,20 @@
                 </div>
                 <div class="col-md-2">
                     <div class="p-2 mt-5 ml-1 mr-1">
-                        <button type="button" onclick="submit()" class="btn btn-block btn-success btn-lg">Save &
-                            Next</button>
+                        <button type="button" onclick="submit()" class="btn btn-block btn-success btn-lg">{{__('Save & Next')}}</button>
                         <br>
                         @if ($inpatient=="YES")
-                        <button disabled type="button" class="btn btn-block btn-primary btn-lg">Inpatient</button>
+                        <button disabled type="button" class="btn btn-block btn-primary btn-lg">{{__('Inpatient')}}</button>
                         @endif
 
                         @if ($inpatient=="NO")
                         <button id="admit-btn" type="button" onclick="admitPatient('YES')"
-                            class="btn btn-block btn-warning btn-lg">Admit Patient</button>
+                            class="btn btn-block btn-warning btn-lg">{{__('Admit Patient')}}</button>
                         @endif
 
                         <br>
                         <button type="button" onclick="clearAll()"
-                            class="btn btn-block btn-danger btn-lg">Clear</button>
+                            class="btn btn-block btn-danger btn-lg">{{__('Clear')}}</button>
                     </div>
                 </div>
             </div>
@@ -418,15 +417,15 @@
     var inpatient='{{$inpatient}}';
     function admitPatient(status){
         bootbox.confirm({
-            title:"<h2>Confirm Admit Patient</h2>",
-            message: "<p>This Will Make This Patient(Out Patient) an Inpatient.<br>Press Admit Patient To Admit The Patient.<br>Note:This Action Cannot Be Undone.</p>",
+            title:"<h2>{{ __('Confirm Admit Patient') }}</h2>",
+            message: "<p>{{ __('This Will Make This Patient(Out Patient) an Inpatient.<br>Press Admit Patient To Admit The Patient.<br>Note:This Action Cannot Be Undone.') }}</p>",
             buttons: {
                 confirm: {
-                    label: 'Admit Patient',
+                    label: "{{ __('Admit Patient') }}",
                     className: 'btn-success'
                 },
                 cancel: {
-                    label: 'Cancel',
+                    label: "{{ __('Cancel') }}",
                     className: 'btn-danger'
                 }
             },
@@ -449,12 +448,12 @@
                             console.log(response);
                             if(response.success){
                                 $("#admit-btn").attr('disabled','disabled');
-                                $("#admit-btn").text("Patient Admitted");
+                                $("#admit-btn").text("{{ __('Patient Admitted') }}");
                                 $("#admit-btn").removeClass('btn-warning');
                                 $("#admit-btn").addClass('btn-primary');
                             }else{
                                 $("#admit-btn").attr('disabled','disabled');
-                                $("#admit-btn").text("Error Occured");
+                                $("#admit-btn").text("{{ __('Error Occured') }}");
                                 $("#admit-btn").removeClass('btn-warning');
                                 $("#admit-btn").addClass('btn-danger');
                             }
@@ -463,12 +462,12 @@
                             console.log('error occured');
                             console.log(data);
                             $("#admit-btn").attr('disabled','disabled');
-                            $("#admit-btn").text("Error Occured");
+                            $("#admit-btn").text("{{ __('Error Occured') }}");
                             $("#admit-btn").removeClass('btn-warning');
                             $("#admit-btn").addClass('btn-danger');
                             bootbox.alert({
-                                title:"Error Occured On Admit Patient",
-                                message: "Error Occured! Try Later."+data,
+                                title:"{{ __('Error Occured On Admit Patient') }}",
+                                message: "{{ __('Error Occured! Try Later.') }}"+data,
                                 backdrop: true
                             });
                         },
@@ -532,15 +531,15 @@
             return;
         }else{
             bootbox.confirm({
-            title:"<h2>Done Channelling</h2>",
-            message: "<p>This will finish the chanelling for the patient.<br>No changes can be done to the prescription after saving.<br>Please check your actoin before comfirm.<br>Note:This Action Cannot Be Undone.</p>",
+            title:"<h2>{{ __('Done Channelling') }}</h2>",
+            message: "<p>{{ __('This will finish the chanelling for the patient.<br>No changes can be done to the prescription after saving.<br>Please check your actoin before comfirm.<br>Note:This Action Cannot Be Undone.') }}</p>",
             buttons: {
                 confirm: {
-                    label: 'Confirm Save',
+                    label: "{{ __('Confirm Save') }}",
                     className: 'btn-success'
                 },
                 cancel: {
-                    label: 'Cancel',
+                    label: "{{ __('Cancel') }}",
                     className: 'btn-danger'
                 }
             },
@@ -577,8 +576,8 @@
             },
             error: function(response){
                 bootbox.alert({
-                    title:"Error Occured On Save",
-                    message: "Error Occured! Try Later."+response,
+                    title:"{{ __('Error Occured On Save') }}",
+                    message: "{{ __('Error Occured! Try Later.') }}"+response,
                     backdrop: true
                 });
             },

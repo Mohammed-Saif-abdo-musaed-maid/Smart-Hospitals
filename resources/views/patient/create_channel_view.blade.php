@@ -7,8 +7,8 @@
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{__('Dashboard')}}</a></li>
+    <li class="active">{{__('Here')}}</li>
 </ol>
 @endsection
 @section('main_content')
@@ -30,7 +30,7 @@
         <!-- small box -->
         <div style="cursor:pointer" id="makeBtn" onclick="makeChannel();" class="small-box bg-yellow">
             <div style="cursor:pointer" class="inner">
-                <p>Channel No:</p>
+                <p>{{__('Channel No:')}}</p>
                 <h3 id="appt_num"></h3>
             </div>
             <a href="#" class="icon"><i class="ion ion-person-add"></i></a>
@@ -89,8 +89,8 @@
                         <label class="col-sm-2 control-label">{{__('Sex')}}</label>
                         <div class="col-sm-3">
                             <select id="patient_sex" readonly class="form-control" name="reg_psex">
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
+                                <option value="Male">{{__('Male')}}</option>
+                                <option value="Female">{{__('Female')}}</option>
                             </select>
                         </div>
                         <label for="inputEmail3" class="col-sm-1 control-label">{{__('Age')}}</label>
@@ -125,10 +125,10 @@
                         <label for="p_reg_num" class="col-sm-2 control-label">{{__('Registration No:')}}</label>
                         <div class="col-sm-8">
                             <input type="number" onchange="createChannelFunction()" required class="form-control"
-                                id="p_reg_num" placeholder="Enter Patient Registration Number">
+                                id="p_reg_num" placeholder="{{ __('Enter Patient Registration Number') }}">
                         </div>
                         <div class="col-sm-2">
-                            <button type="button" class="btn btn-info" onclick="createChannelFunction()">Enter</button>
+                            <button type="button" class="btn btn-info" onclick="createChannelFunction()">{{__('Enter')}}</button>
                         </div>
                     </div>
                 </div>
@@ -248,12 +248,12 @@
                         $("#createchannel3").slideUp(1000);
                     }else{
                         console.log('not found');
-                        alert("Please Enter a Valid Registration Number!");
+                        alert("{{ __('Please Enter a Valid Registration Number!') }}");
                     }
                 }
             });
             }else{
-                alert("Please Enter a Valid Registration Number!");
+                alert("{{ __('Please Enter a Valid Registration Number!') }}");
             }
 
 

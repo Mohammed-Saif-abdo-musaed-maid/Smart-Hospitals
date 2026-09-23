@@ -1,5 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+@php
+\App::setLocale(Session::get('locale'));
+$app_locale = \App::getLocale();
+$is_rtl = ($app_locale === 'ar');
+@endphp
+<html lang="{{ $app_locale }}" dir="{{ $is_rtl ? 'rtl' : 'ltr' }}">
 
 <head>
     <!--Import Google Icon Font-->
@@ -22,6 +27,10 @@
     </script>
 
     <title>@yield('title')</title>
+
+    @if($is_rtl)
+    <link rel="stylesheet" href="{{ asset('css/rtl.css') }}">
+    @endif
 
     <style>
 
@@ -122,6 +131,30 @@
 <body class="bg-dark">
 
     @section('navbar')
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container">
+            <span class="navbar-brand text-white">@yield('app_title')</span>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+                        @if($app_locale == 'si')
+                        සිං
+                        @elseif($app_locale == 'ar')
+                        عربى
+                        @else
+                        EN
+                        @endif
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right">
+                        <a class="dropdown-item" href="{{ route('lang', 'en') }}">{{ __('English') }}</a>
+                        <a class="dropdown-item" href="{{ route('lang', 'si') }}">සිංහල</a>
+                        <a class="dropdown-item" href="{{ route('lang', 'ar') }}">العربية</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
 
     @show
 

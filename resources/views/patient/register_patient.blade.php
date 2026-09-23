@@ -8,8 +8,8 @@
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i> {{__('Dashboard')}}</a></li>
+    <li class="active">{{__('Here')}}</li>
 </ol>
 @endsection
 
@@ -25,17 +25,17 @@
         @if (session()->has('regpsuccess'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-check"></i> Success!</h4>
+            <h4><i class="icon fa fa-check"></i> {{__('Success!')}}</h4>
             <button
                 onclick="window.open('{{route('pregcard',session()->get('pid'))}}','myWin','scrollbars=yes,width=830,height=500,location=no').focus();"
-                class="btn btn-warning ml-5"><i class="fas fa-print"></i> Print Registration Card </button>
+                class="btn btn-warning ml-5"><i class="fas fa-print"></i> {{__('Print Registration Card')}} </button>
             {{session()->get('regpsuccess')}}
         </div>
         @endif
         @if (session()->has('regpfail'))
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-ban"></i> Error!</h4>
+            <h4><i class="icon fa fa-ban"></i> {{__('Error!')}}</h4>
             {{session()->get('regpfail')}}
         </div>
         @endif
@@ -63,14 +63,14 @@
                                 style="color:red">*</span></label>
                         <div class="col-sm-10">
                             <input type="text" minlength="10" pattern="^[a-zA-Z]+(([',. -][a-zA-Z ])?[a-zA-Z]*)*$"
-                                required class="form-control" name="reg_pname" placeholder="Enter Patient Full Name">
+                                required class="form-control" name="reg_pname" placeholder="{{ __('Enter Patient Full Name') }}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">{{__('NIC Number')}}</label>
                         <div class="col-sm-10">
                             <input type="text" pattern="^[1-9]{1}[0-9]{8}[V,X,v,x]|[0-9]{12}$" maxlength="12"
-                                class="form-control" name="reg_pnic" placeholder="National Identity Card Number">
+                                class="form-control" name="reg_pnic" placeholder="{{ __('National Identity Card Number') }}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -78,7 +78,7 @@
                                 style="color:red">*</span></label>
                         <div class="col-sm-10">
                             <input type="text" required class="form-control" name="reg_paddress"
-                                placeholder="Enter Patient Address ">
+                                placeholder="{{ __('Enter Patient Address ') }}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -86,7 +86,7 @@
                                 style="color:red">*</span></label>
                         <div class="col-sm-10">
                             <input pattern="\+[0-9]{11}|[0-9]{10}" required maxlength="12" type="text"
-                                class="form-control" name="reg_ptel" placeholder="Patient Telephone Number">
+                                class="form-control" name="reg_ptel" placeholder="{{ __('Patient Telephone Number') }}">
                         </div>
                     </div>
                     <div class="form-group">
@@ -94,7 +94,7 @@
                                 style="color:red">*</span></label>
                         <div class="col-sm-10">
                             <input type="text" required class="form-control" name="reg_poccupation"
-                                placeholder="Enter Patient Occupation ">
+                                placeholder="{{ __('Enter Patient Occupation ') }}">
                         </div>
                     </div>
 
@@ -103,8 +103,8 @@
                         <label class="col-sm-2 control-label">{{__('Sex')}}<span style="color:red">*</span></label>
                         <div class="col-sm-2 mr-0 pr-0">
                             <select required class="form-control" name="reg_psex">
-                                <option selected value="Male">Male</option>
-                                <option value="Female">Female</option>
+                                <option selected value="Male">{{__('Male')}}</option>
+                                <option value="Female">{{__('Female')}}</option>
                             </select>
                         </div>
 
@@ -115,7 +115,7 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 <input type="date" required max="2014-12-30" class="form-control pull-right"
-                                    name="reg_pbd" placeholder="Birthday">
+                                    name="reg_pbd" placeholder="{{ __('Birthday') }}">
                             </div>
 
                         </div>
@@ -206,7 +206,7 @@
                                     <div c>
                                         <div id="my_camera"></div>
                                     </div>
-                                    <input type="button" class="btn mt-1 btn-flat btn-success" value="Take Snapshot"
+                                    <input type="button" class="btn mt-1 btn-flat btn-success" value="{{ __('Take Snapshot') }}"
                                         onClick="takeSnapshot();">
                                 </div>
                                 <div class="col-sm-5">

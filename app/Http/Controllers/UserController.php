@@ -90,17 +90,17 @@ class UserController extends Controller
         $admin_pw = $request->admin_password;
 
         if (!Hash::check($admin_pw, Auth::user()->password)) {
-            return redirect()->back()->with("error", "Your Entered Password Does Not Matches With Your Current Password.Please Check Again.");
+            return redirect()->back()->with("error", __("Your Entered Password Does Not Matches With Your Current Password.Please Check Again."));
         } else if ($usr = User::find($reset_user_id)) {
             $usr->password = bcrypt("12345678");
             try {
                 $usr->save();
-                return redirect()->back()->with('success', "User " . ucWords($usr->name) . "'s(UserID: $usr->id) Password Reset To System Default(12345678) Password.");
+                return redirect()->back()->with('success', __("User ") . ucWords($usr->name) . __("'s(UserID: ") . $usr->id . __(") Password Reset To System Default(12345678) Password."));
             } catch (\Throwable $th) {
-                return redirect()->back()->with('error', "Unkown Error Occured.Try Later.");
+                return redirect()->back()->with('error', __("Unkown Error Occured.Try Later."));
             }
         } else {
-            return redirect()->back()->with('error', "User($reset_user_id) Does Not Exist.");
+            return redirect()->back()->with('error', __("User(") . $reset_user_id . __(") Does Not Exist."));
         }
     }
 
@@ -158,7 +158,7 @@ class UserController extends Controller
         activity()->performedOn($user)->log('Profile Picture Changed!');
 
         return back()
-            ->with('success', 'You have successfully upload image.');
+            ->with('success', __('You have successfully upload image.'));
     }
 
     public function createnoticeview()
@@ -183,7 +183,7 @@ class UserController extends Controller
                 $nolist[] = DB::table('users')->select('contactnumber')->where('user_type', $list)->get();
             }
         } else {
-            return back()->with('unsuccess', 'Select at least one receiver!!!');
+            return back()->with('unsuccess', __('Select at least one receiver!!!'));
         }
 
         if ($request->emails) {
@@ -196,10 +196,10 @@ class UserController extends Controller
             $count = 1;
         }
         if ($count == 0) {
-            return back()->with('unsuccess', 'Select at least one method to send the notice!!!');
+            return back()->with('unsuccess', __('Select at least one method to send the notice!!!'));
         }
 
-        return back()->with('success', 'Messages Sent Successfully!');
+        return back()->with('success', __('Messages Sent Successfully!'));
     }
 
     public function email($data, $emaillist)

@@ -1,5 +1,10 @@
 <!doctype html>
-<html lang="en">
+@php
+\App::setLocale(Session::get('locale'));
+$app_locale = \App::getLocale();
+$is_rtl = ($app_locale === 'ar');
+@endphp
+<html lang="{{ $app_locale }}" dir="{{ $is_rtl ? 'rtl' : 'ltr' }}">
 
 <head>
     <!-- Required meta tags -->
@@ -12,7 +17,11 @@
 
     <script src="https://kit.fontawesome.com/af9fc7310f.js"></script>
 
-    <title>Print Attendance</title>
+    <title>{{ __('Print Attendance') }}</title>
+
+    @if($is_rtl)
+    <link rel="stylesheet" href="{{ asset('css/rtl.css') }}">
+    @endif
 
     <style>
         @media print {
@@ -32,23 +41,23 @@
             <div class="row">
                 <div class="col-md-3">
                     <button onclick="window.history.back()" class="mt-5 btn-sm btn btn-success no-print"><i
-                            class="fa fa-arrow-left"></i> Back
+                            class="fa fa-arrow-left"></i> {{ __('Back') }}
                     </button>
-                    <button onclick="window.print()" class="mt-5 btn-sm btn btn-warning no-print">Print <i
+                    <button onclick="window.print()" class="mt-5 btn-sm btn btn-warning no-print">{{ __('Print') }} <i
                             class="fas fa-print"></i></button>
-                    <button onclick="HTMLtoPDF()" class="mt-5 btn-sm btn btn-danger no-print">Download PDF</button>
+                    <button onclick="HTMLtoPDF()" class="mt-5 btn-sm btn btn-danger no-print">{{ __('Download PDF') }}</button>
                 </div>
             </div>
             <br>
 
             <div class="box" id="HTMLtoPDF">
-                <h2 align="center">CENTRAL HOSPITAL OF AYRVEDA</h2>
-                <h4 align="center">Clinic Report</h4>
+                <h2 align="center">{{ __('CENTRAL HOSPITAL OF AYRVEDA') }}</h2>
+                <h4 align="center">{{ __('Clinic Report') }}</h4>
 
                 <br>
                 {{-- <label>Date : -----------------------</label>
                 <br> --}}
-                <label>Date : @php echo date('Y/m/d'); @endphp</label>
+                <label>{{ __('Date :') }} @php echo date('Y/m/d'); @endphp</label>
                 <br>
                 <br>
 
@@ -58,18 +67,18 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>Clinic Name</th>
-                                    <th>Doctor Incharge</th>
-                                    <th>male</th>
-                                    <th>female</th>
-                                    <th>Total</th>
+                                    <th>{{ __('Clinic Name') }}</th>
+                                    <th>{{ __('Doctor Incharge') }}</th>
+                                    <th>{{ __('male') }}</th>
+                                    <th>{{ __('female') }}</th>
+                                    <th>{{ __('Total') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (App\Clinic::all() as $item)
                                 <tr>
                                     <td>{{$item->name_eng}}</td>
-                                    <td>Dr.{{ucwords($item->doctor->name)}}</td>
+                                    <td>{{ __('Dr.') }}{{ucwords($item->doctor->name)}}</td>
                                     @php
                                     $male=0;
                                     $female=0;
@@ -89,21 +98,21 @@
                                 @endforeach
                             </tbody>
                             <tfoot>
-                                <th>Clinic Name</th>
-                                <th>Doctor Incharge</th>
-                                <th>male</th>
-                                <th>female</th>
-                                <th>Total</th>
+                                <th>{{ __('Clinic Name') }}</th>
+                                <th>{{ __('Doctor Incharge') }}</th>
+                                <th>{{ __('male') }}</th>
+                                <th>{{ __('female') }}</th>
+                                <th>{{ __('Total') }}</th>
                             </tfoot>
                         </table>
                     </div>
                 </div>
 
                 <br>
-                <label>Made By : {{$name}}</label>
+                <label>{{ __('Made By :') }} {{$name}}</label>
                 <div align="right">
                     <label style="display:block">...............................................................</label>
-                    <label>Sighned By , Officer</label>
+                    <label>{{ __('Sighned By , Officer') }}</label>
                 </div>
                 <br>
                 <br>

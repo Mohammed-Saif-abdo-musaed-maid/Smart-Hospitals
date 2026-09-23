@@ -2,13 +2,13 @@
 
 @section('title', $title)
 
-@section('content_title',"Clinic Report")
-@section('content_description',"Personalize Your Account")
+@section('content_title',__("Clinic Report"))
+@section('content_description',__("Personalize Your Account"))
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{ __('Dashboard') }}</a></li>
+    <li class="active">{{ __('Here') }}</li>
 </ol>
 @endsection
 
@@ -17,14 +17,14 @@
 $name = $user->name;
 $user_type =$user->user_type;
 $image_path =$user->img_path;
-$outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
+$outlet = 'مستشفى الشفاء'?>
 
 
 <section class="content">
 
     <div class="box box-danger">
         <div class="box-header">
-            <h3 class="box-title ">Clinic Report</h3>
+            <h3 class="box-title ">{{ __('Clinic Report') }}</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -35,18 +35,18 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                             aria-describedby="example1_info">
                             <thead>
                                 <tr>
-                                    <th>Clinic Name</th>
-                                    <th>Doctor Incharge</th>
-                                    <th>male</th>
-                                    <th>female</th>
-                                    <th>Total</th>
+                                    <th>{{ __('Clinic Name') }}</th>
+                                    <th>{{ __('Doctor Incharge') }}</th>
+                                    <th>{{ __('male') }}</th>
+                                    <th>{{ __('female') }}</th>
+                                    <th>{{ __('Total') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($clinic as $item)
                                 <tr>
                                     <td>{{$item->name_eng}}</td>
-                                    <td>Dr.{{ucwords($item->doctor->name)}}</td>
+                                    <td>{{ __('Dr.') }}{{ucwords($item->doctor->name)}}</td>
                                     @php
                                     $male=0;
                                     $female=0;
@@ -67,11 +67,11 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                                 @endforeach
                             </tbody>
                             <tfoot>
-                                <th>Clinic Name</th>
-                                <th>Doctor Incharge</th>
-                                <th>male</th>
-                                <th>female</th>
-                                <th>Total</th>
+                                <th>{{ __('Clinic Name') }}</th>
+                                <th>{{ __('Doctor Incharge') }}</th>
+                                <th>{{ __('male') }}</th>
+                                <th>{{ __('female') }}</th>
+                                <th>{{ __('Total') }}</th>
                             </tfoot>
                         </table>
                     </div>
@@ -83,7 +83,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
             <div class="col-md-3">
                 <form action="{{route('print_clinic')}}" method="post">
                     @csrf
-                    <button type="submit" class="btnprn btn btn-danger">Print Preview</button>
+                    <button type="submit" class="btnprn btn btn-danger">{{ __('Print Preview') }}</button>
                 </form>
             </div>
         </div>

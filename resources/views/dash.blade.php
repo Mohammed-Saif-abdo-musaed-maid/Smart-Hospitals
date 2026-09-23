@@ -7,8 +7,8 @@
 @section('content_description',__("Operate All The Things Here"))
 @section('breadcrumbs')
 <ol class="breadcrumb">
-    <li><a href="#"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="#"><i class="fas fa-tachometer-alt"></i>{{ __('Dashboard') }}</a></li>
+    <li class="active">{{ __('Here') }}</li>
 </ol>
 
 @endsection
@@ -232,12 +232,12 @@
                             <small>{{$note->time}}</small>
                         </div>
                         <p class="mb-1">{{$note->description}}</p>
-                        <small>By {{$note->name}} ({{$note->user_type}})</small>
+                        <small>{{ __('By') }} {{$note->name}} ({{$note->user_type}})</small>
                     </a>
                 </div>
                 @endforeach
                 @if (count($notices)==0)
-                <h3 class="text-center"><i class="fas fa-angle-double-left"></i>..........Empty..........<i
+                <h3 class="text-center"><i class="fas fa-angle-double-left"></i>..........{{ __('Empty') }}..........<i
                         class="fas fa-angle-double-right"></i></h3>
                 @endif
             </div>
@@ -250,7 +250,7 @@
             <div class="box-header">
                 <i class="fa fa-calendar"></i>
 
-                <h3 class="box-title">Calendar</h3>
+                <h3 class="box-title">{{ __('Calendar') }}</h3>
                 <!-- tools box -->
                 <div class="pull-right box-tools">
                     <!-- button with a dropdown -->
@@ -258,10 +258,10 @@
                         <button type="button" class="btn btn-success btn-sm dropdown-toggle" data-toggle="dropdown">
                             <i class="fa fa-bars"></i></button>
                         <ul class="dropdown-menu pull-right" role="menu">
-                            <li><a href="#">Add new event</a></li>
-                            <li><a href="#">Clear events</a></li>
+                            <li><a href="#">{{ __('Add new event') }}</a></li>
+                            <li><a href="#">{{ __('Clear events') }}</a></li>
                             <li class="divider"></li>
-                            <li><a href="#">View calendar</a></li>
+                            <li><a href="#">{{ __('View calendar') }}</a></li>
                         </ul>
                     </div>
                     <button type="button" class="btn btn-success btn-sm" data-widget="collapse"><i class="fa fa-minus"></i>

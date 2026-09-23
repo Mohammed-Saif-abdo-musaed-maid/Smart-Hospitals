@@ -7,8 +7,8 @@
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-  <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-  <li class="active">Here</li>
+  <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{ __('Dashboard') }}</a></li>
+  <li class="active">{{ __('Here') }}</li>
 </ol>
 @endsection
 
@@ -20,20 +20,20 @@
     @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-check"></i> Success!</h4>
+            <h4><i class="icon fa fa-check"></i> {{ __('Success!') }}</h4>
             {{session()->get('success')}}
         </div>
         @endif
         @if (session()->has('error'))
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-ban"></i> Error!</h4>
+            <h4><i class="icon fa fa-ban"></i> {{ __('Error!') }}</h4>
             {{session()->get('error')}}
         </div>
         @endif
     <div class="box box-info">
       <div class="box-header with-border">
-        <h3 class="box-title">Reset User</h3>
+        <h3 class="box-title">{{__('Reset User')}}</h3>
       </div>
       <!-- /.box-header -->
       <!-- form start -->
@@ -44,7 +44,7 @@
             <label class="col-sm-3 control-label" for="inputEmail3">{{__('User ID')}} <span class="text-red">*</span></label>
 
             <div class="col-sm-9">
-              <input class="form-control" name="userid" id="inputEmail3" required type="number" placeholder="User ID">
+              <input class="form-control" name="userid" id="inputEmail3" required type="number" placeholder="{{ __('User ID') }}">
             </div>
           </div>
           <div class="form-group">
@@ -52,7 +52,7 @@
 
             <div class="col-sm-9">
               <input class="form-control" required name="admin_password" id="inputPassword3" type="password"
-                placeholder="Password">
+                placeholder="{{ __('Password') }}">
             </div>
           </div>
         </div>

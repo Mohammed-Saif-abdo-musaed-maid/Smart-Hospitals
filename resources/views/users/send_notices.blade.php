@@ -2,13 +2,13 @@
 
 @section('title', $title)
 
-@section('content_title',"Notices")
-@section('content_description',"Send Notices & Push General Notices To Noticeboard")
+@section('content_title',__("Notices"))
+@section('content_description',__("Send Notices & Push General Notices To Noticeboard"))
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{ __('Dashboard') }}</a></li>
+    <li class="active">{{ __('Here') }}</li>
 </ol>
 @endsection
 
@@ -17,7 +17,7 @@
 $name = $user->name;
 $user_type =$user->user_type;
 $image_path =$user->img_path;
-$outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
+$outlet = 'مستشفى الشفاء'?>
 
 <section class="content">
 
@@ -29,14 +29,12 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
 
                     <li class="@if (!session('success')&&!session('unsuccess')||session('successnotice')) active @endif">
                         <a href="#activity" data-toggle="tab"
-                            aria-expanded="@if (!session('unsuccess')&&!session('success')||session('successnotice')) true @else false @endif">Add
-                            Notice</a>
+                            aria-expanded="@if (!session('unsuccess')&&!session('success')||session('successnotice')) true @else false @endif">{{ __('Add Notice') }}</a>
                     </li>
 
                     <li class="@if (session('success')||session('unsuccess')) active @endif">
                         <a href="#settings" data-toggle="tab"
-                            aria-expanded="@if (session('success') ||session('unsuccess')) true @else false @endif">Send
-                            Notice</a>
+                            aria-expanded="@if (session('success') ||session('unsuccess')) true @else false @endif">{{ __('Send Notice') }}</a>
                     </li>
 
 
@@ -73,13 +71,13 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                                                 @csrf
                                                 <div class="form-group mb-2">
                                                     <input type="text" class="form-control" name="subject"
-                                                        placeholder="enter subject">
+                                                        placeholder="{{ __('enter subject') }}">
                                                 </div>
                                                 <div class="form-group mx-sm-3 mb-2">
                                                     <input type="text" class="form-control" name="description"
-                                                        placeholder="enter description">
+                                                        placeholder="{{ __('enter description') }}">
                                                 </div>
-                                                <button type="submit" class="btn btn-warning mb-2">Add</button>
+                                                <button type="submit" class="btn btn-warning mb-2">{{ __('Add') }}</button>
                                             </form>
                                         </div>
                                         <div class="col-md-2"></div>
@@ -90,10 +88,10 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                                                 role="grid" aria-describedby="example1_info">
                                                 <thead>
                                                     <tr>
-                                                        <th>Subject</th>
-                                                        <th>Description</th>
-                                                        <th>Created At</th>
-                                                        <th>Action</th>
+                                                        <th>{{ __('Subject') }}</th>
+                                                        <th>{{ __('Description') }}</th>
+                                                        <th>{{ __('Created At') }}</th>
+                                                        <th>{{ __('Action') }}</th>
 
                                                     </tr>
                                                 </thead>
@@ -110,17 +108,17 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                                                                     value="{{$app->id}}">
                                                                 <button type="submit" class="btn-sm btn-danger"><i
                                                                         class="fa fa-trash">
-                                                                        Delete</i></button>
+                                                                        {{ __('Delete') }}</i></button>
                                                             </form>
                                                         </td>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
                                                 <tfoot>
-                                                    <th>Subject</th>
-                                                    <th>Description</th>
-                                                    <th>Created At</th>
-                                                    <th>Action</th>
+                                                    <th>{{ __('Subject') }}</th>
+                                                    <th>{{ __('Description') }}</th>
+                                                    <th>{{ __('Created At') }}</th>
+                                                    <th>{{ __('Action') }}</th>
                                                 </tfoot>
                                             </table>
                                         </div>
@@ -155,9 +153,9 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
 
                                     <!-- textarea -->
                                     <div class="form-group">
-                                        <label>Enter your Message</label>
+                                        <label>{{ __('Enter your Message') }}</label>
                                         <textarea class="form-control" name="message" rows="5"
-                                            placeholder="Enter Message" required></textarea>
+                                            placeholder="{{ __('Enter Message') }}" required></textarea>
                                     </div>
 
                                     <br>
@@ -167,46 +165,46 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                                         </div>
 
                                         <div class="col-md-2">
-                                            <label>Select Method :</label>
+                                            <label>{{ __('Select Method :') }}</label>
                                         </div>
 
                                         <div class="col-md-3">
                                             <div class="checkbox" >
                                                 <label>
-                                                    <input type="checkbox" name="emails" value="email"> Emails
+                                                    <input type="checkbox" name="emails" value="email"> {{ __('Emails') }}
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="sms" value="sms"> SMS
+                                                    <input type="checkbox" name="sms" value="sms"> {{ __('SMS') }}
                                                 </label>
                                             </div>
                                         </div>
 
                                         <div class="col-md-2">
-                                            <label>Select Receivers :</label>
+                                            <label>{{ __('Select Receivers :') }}</label>
                                         </div>
 
                                         <div class="col-md-3">
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="receiverlist[]" value="admin"> Admin
+                                                    <input type="checkbox" name="receiverlist[]" value="admin"> {{ __('Admin') }}
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="receiverlist[]" value="doctor"> Doctor
+                                                    <input type="checkbox" name="receiverlist[]" value="doctor"> {{ __('Doctor') }}
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
-                                                    <input type="checkbox" name="receiverlist[]" value="general"> Staff
+                                                    <input type="checkbox" name="receiverlist[]" value="general"> {{ __('Staff') }}
                                                 </label>
                                             </div>
                                             <div class="checkbox">
                                                 <label>
                                                     <input type="checkbox" name="receiverlist[]" value="pharmacist">
-                                                    Pharmasist
+                                                    {{ __('Pharmasist') }}
                                                 </label>
                                             </div>
 
@@ -219,7 +217,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
                                     <br>
 
                                     <div class="form-group col-md-2 pull-right">
-                                        <input type="submit" class="btn btn-danger btn-lg" name="send" value="Send">
+                                        <input type="submit" class="btn btn-danger btn-lg" name="send" value="{{ __('Send') }}">
                                     </div>
 
                                 </form>

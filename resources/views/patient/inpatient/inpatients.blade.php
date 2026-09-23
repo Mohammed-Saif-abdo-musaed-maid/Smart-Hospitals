@@ -2,14 +2,14 @@
 
 @section('title', $title)
 
-@section('content_title',"In Patients")
+@section('content_title',__("In Patients"))
 @section('content_description',__("Details About Admitted & Discharged Patients"))
 
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{ __('Dashboard') }}</a></li>
+    <li class="active">{{ __('Here') }}</li>
 </ol>
 @endsection
 
@@ -24,16 +24,16 @@ use App\Patients;
 
         <div class="box box-solid">
             <div class="box-header with-border">
-                <h3 class="box-title">Search Options</h3>
+                <h3 class="box-title">{{ __('Search Options') }}</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
                 <form method="GET" action="{{route('inPatientReportData')}}">
-                    <label for="">Pick a Date</label>
+                    <label for="">{{ __('Pick a Date') }}</label>
                     <div class="input-group input-group-sm">
                         <input @if($date!=null) value="{{$date}}" @endif type="date" required max="{{date('Y-m-d')}}" name="date" id="date" class="form-control">
                         <span class="input-group-btn">
-                            <button type="submit" class="btn btn-info btn-flat">Go!</button>
+                            <button type="submit" class="btn btn-info btn-flat">{{ __('Go!') }}</button>
                         </span>
                     </div>
                 </form>
@@ -57,7 +57,7 @@ use App\Patients;
         @if (session()->has('fail'))
         <div class="alert alert-info alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-ban"></i> Sorry!</h4>
+            <h4><i class="icon fa fa-ban"></i> {{ __('Sorry!') }}</h4>
 
             {{session()->get('fail')}}
         </div>
@@ -72,7 +72,7 @@ use App\Patients;
 
         <div class="box box-solid">
             <div class="box-header with-border">
-                <h3 class="box-title">Search Results</h3>
+                <h3 class="box-title">{{ __('Search Results') }}</h3>
             </div>
             <!-- /.box-header -->
             <div class="box-body">
@@ -83,11 +83,11 @@ use App\Patients;
                                 aria-describedby="example1_info">
                                 <thead>
                                     <tr>
-                                        <th>Patient</th>
-                                        <th>ID</th>
-                                        <th>Admit Date</th>
-                                        <th>Status</th>
-                                        <th>Discharged Date</th>
+                                        <th>{{ __('Patient') }}</th>
+                                        <th>{{ __('ID') }}</th>
+                                        <th>{{ __('Admit Date') }}</th>
+                                        <th>{{ __('Status') }}</th>
+                                        <th>{{ __('Discharged Date') }}</th>
 
                                     </tr>
                                 </thead>
@@ -99,16 +99,16 @@ use App\Patients;
                                         <td>{{explode(" ",$rec->created_at)[0]}}</td>
 
                                         @if ($rec->discharged_date==null)
-                                        <td>Not Discharged</td>
+                                        <td>{{ __('Not Discharged') }}</td>
                                         @else
-                                        <td>Discharged</td>
+                                        <td>{{ __('Discharged') }}</td>
                                         @endif
 
                                         @if ($rec->discharged_date!=null)
                                         <td>{{explode(" ",$rec->discharged_date)[0]}}</td>
                                         @else
                                         <td>
-                                            Not Found
+                                            {{ __('Not Found') }}
                                         </td>
 
                                         @endif
@@ -118,11 +118,11 @@ use App\Patients;
                                     @endforeach
                                 </tbody>
                                 <tfoot>
-                                    <th>Patient</th>
-                                    <th>ID</th>
-                                    <th>Admit Date</th>
-                                    <th>Status</th>
-                                    <th>Discharged Date</th>
+                                    <th>{{ __('Patient') }}</th>
+                                    <th>{{ __('ID') }}</th>
+                                    <th>{{ __('Admit Date') }}</th>
+                                    <th>{{ __('Status') }}</th>
+                                    <th>{{ __('Discharged Date') }}</th>
 
                                 </tfoot>
                             </table>

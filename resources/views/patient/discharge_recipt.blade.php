@@ -19,7 +19,7 @@ use App\Patients;
 }
 }
 </style>
-<title>Print Discharge Recipt</title>
+<title>{{ __('Print Discharge Recipt') }}</title>
 </head>
 <body>
 
@@ -28,22 +28,22 @@ use App\Patients;
         <div class="col-md-3"></div>
         <div class="box-header with-border">
             <h2 class="text-center text-upppercase">
-                AYRUVEDA HOSPITAL KESBAWA<br>
-                <small class="small">Discharge Reciept</small>
+                {{ __('AYRUVEDA HOSPITAL KESBAWA') }}<br>
+                <small class="small">{{ __('Discharge Reciept') }}</small>
             </h2>
             <br>
-            Patient Name: {{Patients::find($INPtableUpdate->patient_id)->name}}<br>
-            Patient ID: {{Patients::find($INPtableUpdate->patient_id)->id}}<br>
-            Prescribed By: Dr.{{$INPtableUpdate->approved_doctor}}<br>
+            {{ __('Patient Name:') }} {{Patients::find($INPtableUpdate->patient_id)->name}}<br>
+            {{ __('Patient ID:') }} {{Patients::find($INPtableUpdate->patient_id)->id}}<br>
+            {{ __('Prescribed By:') }} {{ __('Dr.') }}{{$INPtableUpdate->approved_doctor}}<br>
             <br>
             <br>
             <div>
-            <h5>Discharged Date : {{$INPtableUpdate->discharged_date}}</h5>
-            <h5>Discription : {{$INPtableUpdate->description}}</h5>
-            <h5>Issued by : {{ucwords(Auth::user()->name)}}</h5>
+            <h5>{{ __('Discharged Date') }} : {{$INPtableUpdate->discharged_date}}</h5>
+            <h5>{{ __('Discription') }} : {{$INPtableUpdate->description}}</h5>
+            <h5>{{ __('Issued by') }} : {{ucwords(Auth::user()->name)}}</h5>
             </div>
-            <button onclick="window.print()" class="btn no-print btn-lg btn-info">Print <i class="fas fa-print"></i></button>
-            <a href="{{route('discharge_inpatient')}}" class="btn btn-dark btn-lg no-print">Go Back</a>
+            <button onclick="window.print()" class="btn no-print btn-lg btn-info">{{ __('Print') }} <i class="fas fa-print"></i></button>
+            <a href="{{route('discharge_inpatient')}}" class="btn btn-dark btn-lg no-print">{{ __('Go Back') }}</a>
         </div>
 
         <div class="col-md-3"></div>

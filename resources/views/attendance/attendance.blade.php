@@ -7,8 +7,8 @@
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{__('Dashboard')}}</a></li>
+    <li class="active">{{__('Here')}}</li>
 </ol>
 @endsection
 
@@ -66,7 +66,7 @@
                     strokeWidth: 2
                 }
             },
-            title: "Attendance",
+            title: "{{ __('Attendance') }}",
             colorAxis: {
                 colors: ['#f25555', '#edf255', '#55b6f2', '#55f27f'],
                 // colors: ['present', 'halfday','holliday','absent'],
@@ -94,19 +94,17 @@
                     <div class="row">
                         <div class="w-100" id="calendar_basic" style="height:25rem"></div>
                         <div class="col-md-9">
-                            <p><span class="text-red">*</span>Hours You Worked Are Displayed In The Calander.The Color
-                                Changes
-                                With The Number Of Hours.</p>
+                            <p><span class="text-red">*</span>{{__('Hours You Worked Are Displayed In The Calander.The Color Changes With The Number Of Hours.')}}</p>
                         </div>
                         <div class="col-md-3">
                             <form action="{{route('getyearattendance')}}" method="post">
                                 @csrf
                                 <div class="row">
                                     <div class="col-xs-7">
-                                        <input type="number" min="2018" max="{{date('Y')}}" class="form-control" name="year" placeholder="Enter Year">
+                                        <input type="number" min="2018" max="{{date('Y')}}" class="form-control" name="year" placeholder="{{ __('Enter Year') }}">
                                     </div>
                                     <div class="col-xs-5">
-                                        <input type="submit" class="form-control btn btn-success" value="Find">
+                                        <input type="submit" class="form-control btn btn-success" value="{{ __('Find') }}">
                                     </div>
                                 </div>
                             </form>
@@ -129,10 +127,10 @@
                     <table id="example2" class="table table-bordered table-striped">
                         <thead>
                             <tr>
-                                <th>Date</th>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Hours Worked</th>
+                                <th>{{__('Date')}}</th>
+                                <th>{{__('Start Time')}}</th>
+                                <th>{{__('End Time')}}</th>
+                                <th>{{__('Hours Worked')}}</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -147,10 +145,10 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                <th>Date</th>
-                                <th>Start Time</th>
-                                <th>End Time</th>
-                                <th>Hours Worked</th>
+                                <th>{{__('Date')}}</th>
+                                <th>{{__('Start Time')}}</th>
+                                <th>{{__('End Time')}}</th>
+                                <th>{{__('Hours Worked')}}</th>
                             </tr>
                         </tfoot>
                     </table>

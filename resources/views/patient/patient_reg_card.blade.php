@@ -1,5 +1,10 @@
 <!doctype html>
-<html lang="en">
+@php
+\App::setLocale(Session::get('locale'));
+$app_locale = \App::getLocale();
+$is_rtl = ($app_locale === 'ar');
+@endphp
+<html lang="{{ $app_locale }}" dir="{{ $is_rtl ? 'rtl' : 'ltr' }}">
 
 <head>
     <!-- Required meta tags -->
@@ -12,7 +17,11 @@
 
     <script src="https://kit.fontawesome.com/af9fc7310f.js"></script>
 
-    <title>Patient Card</title>
+    <title>{{ __('Patient Card') }}</title>
+
+    @if($is_rtl)
+    <link rel="stylesheet" href="{{ asset('css/rtl.css') }}">
+    @endif
 
     <style>
         @media print {
@@ -35,15 +44,15 @@
                     <div class="rounded"
                         style="margin-left:0.01cm;height:1.7cm;width:10.93cm;background-color:rgb(204, 99, 14)">
                         <h4 style="padding-top: 16px;font-weight: lighter"
-                            class="text-uppercase text-center text-white">Ayruvedic Hospital Kesbawa</h4>
+                            class="text-uppercase text-center text-white">{{ __('Ayruvedic Hospital Kesbawa') }}</h4>
                     </div>
                     <div style="margin-left:1px;font-size:13px" class="row mt-2">
 
                         <div class="col-4">
-                            <span>Reg. Num.<br></span>
-                            <span>Name<br></span>
-                            <span>Birth Day & Sex<br></span>
-                            <span>Registration Date<br></span>
+                            <span>{{ __('Reg. Num.') }}<br></span>
+                            <span>{{ __('Name') }}<br></span>
+                            <span>{{ __('Birth Day & Sex') }}<br></span>
+                            <span>{{ __('Registration Date') }}<br></span>
                         </div>
                         <div class="col-1 m-0 p-0 text-left">
                             <span>: <br></span>
@@ -82,7 +91,7 @@
                 </div>
             </div>
             <div class="col-3">
-                <button onclick="window.print()" class="mt-5 btn-sm btn btn-outline-primary no-print">Print <i
+                <button onclick="window.print()" class="mt-5 btn-sm btn btn-outline-primary no-print">{{ __('Print') }} <i
                         class="fas fa-print"></i></button>
             </div>
 

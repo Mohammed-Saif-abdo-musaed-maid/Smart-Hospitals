@@ -7,8 +7,8 @@
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{ __('Dashboard') }}</a></li>
+    <li class="active">{{ __('Here') }}</li>
 </ol>
 @endsection
 
@@ -22,8 +22,8 @@
             @if ($message = Session::get('success'))
             <div style="margin-top:3.5vh !important" class="alert alert-success alert-dismissible">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-                <h4><i class="icon fa fa-check"></i>Success!</h4>
-                New User-{{$message}} Added To The System.
+                <h4><i class="icon fa fa-check"></i>{{ __('Success!') }}</h4>
+                {{ __('New User-') }}{{$message}}{{ __(' Added To The System.') }}
             </div>
             @endif
 
@@ -81,7 +81,7 @@
                         <div class="form-group">
                             <label>{{__('Contact No :')}} </label>
                             <input required type="text" class="form-control" name="contactno"
-                                placeholder="Enter Your Contact No...">
+                                placeholder="{{ __('Enter Your Contact No...') }}">
                         </div>
 
 
@@ -89,10 +89,10 @@
                             <label for="user-type">{{ __('User Type') }} <span class="text-red">*</span></label>
                             <select required id="user-type" type="select" class="form-control" name="user_type"
                                 required>
-                                <option value="admin">Administrator</option>
-                                <option value="doctor">Doctor</option>
-                                <option value="pharmacist">Pharmacist</option>
-                                <option selected value="general">General Staff</option>
+                                <option value="admin">{{ __('Administrator') }}</option>
+                                <option value="doctor">{{ __('Doctor') }}</option>
+                                <option value="pharmacist">{{ __('Pharmacist') }}</option>
+                                <option selected value="general">{{ __('General Staff') }}</option>
                             </select>
                         </div>
 

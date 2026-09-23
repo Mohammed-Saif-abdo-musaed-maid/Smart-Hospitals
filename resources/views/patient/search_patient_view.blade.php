@@ -6,8 +6,8 @@
 @section('content_description',__("Search,View & Update Patient Details"))
 @section('breadcrumbs')
 <ol class="breadcrumb">
-    <li><a href="#"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="#"><i class="fas fa-tachometer-alt"></i>{{__('Dashboard')}}</a></li>
+    <li class="active">{{__('Here')}}</li>
 </ol>
 
 @endsection
@@ -37,21 +37,21 @@
                     <div class="col-md-5">
 
                         <label class="mr-2">
-                            <input onchange="changeFunc('Name');" style="display:inline-block" checked type="radio"
+                            <input onchange="changeFunc('{{ __('Name') }}');" style="display:inline-block" checked type="radio"
                                 name="cat" id="cat" value="name">
                             {{__('Name')}}
                         </label>
 
 
                         <label class="ml-2 mr-4">
-                            <input onchange="changeFunc('Telephone Number');" style="display:inline-block" type="radio"
+                            <input onchange="changeFunc('{{ __('Telephone Number') }}');" style="display:inline-block" type="radio"
                                 name="cat" id="cat" value="telephone">
                             {{__('Telephone')}}
                         </label>
 
 
                         <label>
-                            <input onchange="changeFunc('NIC Number');" style="display:inline-block" type="radio"
+                            <input onchange="changeFunc('{{ __('NIC Number') }}');" style="display:inline-block" type="radio"
                                 name="cat" id="cat" value="nic">
                             {{__('NIC Number')}}
                         </label>
@@ -60,7 +60,7 @@
                 </div>
                 <script>
                     function changeFunc(txt){
-                        document.getElementById("keyword").placeholder ="Enter Patient " +txt;
+                        document.getElementById("keyword").placeholder ="{{ __('Enter Patient') }} " +txt;
                     }
                 </script>
                 <div class="row">
@@ -68,7 +68,7 @@
                     <div class="col-md-10">
                         <div class="input-group">
                             <input required type="text" value="{{$old_keyword}}" class="form-control" id="keyword" name="keyword"
-                                placeholder="Enter Patient">
+                                placeholder="{{ __('Enter Patient') }}">
                             <span class="input-group-btn">
                                 <button type="submit" class="btn btn-default">
                                     <span class="glyphicon glyphicon-search"></span>
@@ -117,35 +117,35 @@
                         <label for="inputEmail3" class="col-sm-2 control-label">{{__('Full Name')}}</label>
                         <div class="col-sm-10">
                             <input readonly value="{{$patient->name}}" type="text" required class="form-control"
-                                name="reg_pname" placeholder="Enter Patient Full Name">
+                                name="reg_pname" placeholder="{{ __('Enter Patient Full Name') }}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputEmail3" class="col-sm-2 control-label">{{__('NIC Number')}}</label>
                         <div class="col-sm-10">
                             <input readonly value="{{$patient->nic}}" type="text" required class="form-control"
-                                name="reg_pnic" placeholder="National Identity Card Number">
+                                name="reg_pnic" placeholder="{{ __('National Identity Card Number') }}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-2 control-label">{{__('Address')}}</label>
                         <div class="col-sm-10">
                             <input readonly type="text" value="{{$patient->address}}" required class="form-control"
-                                name="reg_paddress" placeholder="Enter Patient Address ">
+                                name="reg_paddress" placeholder="{{ __('Enter Patient Address ') }}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-2 control-label">{{__('Telephone')}}</label>
                         <div class="col-sm-10">
                             <input readonly value="{{$patient->telephone}}" type="tel" class="form-control"
-                                name="reg_ptel" placeholder="Patient Telephone Number">
+                                name="reg_ptel" placeholder="{{ __('Patient Telephone Number') }}">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="inputPassword3" class="col-sm-2 control-label">{{__('Occupation')}}</label>
                         <div class="col-sm-10">
                             <input readonly value="{{$patient->occupation}}" type="text" required class="form-control"
-                                name="reg_poccupation" placeholder="Enter Patient Occupation ">
+                                name="reg_poccupation" placeholder="{{ __('Enter Patient Occupation ') }}">
                         </div>
                     </div>
                     <!-- select -->
@@ -154,7 +154,7 @@
                         <label class="col-sm-2 control-label">{{__('Sex')}}</label>
                         <div class="col-sm-2 mr-0 pr-0">
                             <input readonly value="{{$patient->sex}}" type="text" required class="form-control"
-                                name="reg_poccupation" placeholder="Enter Patient Occupation ">
+                                name="reg_poccupation" placeholder="{{ __('Enter Patient Occupation ') }}">
                         </div>
 
                         <label class="col-sm-2 control-label">{{__('DOB')}}</label>
@@ -164,7 +164,7 @@
                                     <i class="fa fa-calendar"></i>
                                 </div>
                                 <input readonly value="{{$patient->bod}}" type="text" class="form-control pull-right"
-                                    name="reg_pbd" placeholder="Birthday">
+                                    name="reg_pbd" placeholder="{{ __('Birthday') }}">
                                 <input readonly value="{{$patient->id}}" type="text" class="form-control pull-right"
                                     name="reg_pid" style="display:none">
 

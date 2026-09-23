@@ -7,8 +7,8 @@
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{ __('Dashboard') }}</a></li>
+    <li class="active">{{ __('Here') }}</li>
 </ol>
 @endsection
 
@@ -20,14 +20,14 @@
         @if (session()->has('success'))
         <div class="alert alert-success alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-check"></i> Success!</h4>
+            <h4><i class="icon fa fa-check"></i> {{ __('Success!') }}</h4>
             {{session()->get('success')}}
         </div>
         @endif
         @if (session()->has('fail'))
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-ban"></i> Error!</h4>
+            <h4><i class="icon fa fa-ban"></i> {{ __('Error!') }}</h4>
 
             {{session()->get('fail')}}
         </div>
@@ -47,7 +47,7 @@
 
                         <div class="col-sm-10">
                             <input class="form-control" name="ward_num" required id="ward_num" type="number"
-                                placeholder="Ward Number">
+                                placeholder="{{ __('Ward Number') }}">
                         </div>
                     </div>
 
@@ -57,7 +57,7 @@
 
                         <div class="col-sm-10">
                             <input class="form-control" required name="total_beds" id="total_beds" type="number"
-                                placeholder="Total Beds">
+                                placeholder="{{ __('Total Beds') }}">
                         </div>
                     </div>
 
@@ -67,7 +67,7 @@
 
                         <div class="col-sm-10">
                             <input class="form-control" required name="free_beds" id="free_beds" type="number"
-                                placeholder="Free Beds">
+                                placeholder="{{ __('Free Beds') }}">
                         </div>
                     </div>
 
@@ -78,7 +78,7 @@
                         <div class="col-sm-10">
                             <select class="form-control" name="doctor" id="doctor">
                                 @foreach ($docs as $doctor)
-                                <option value="{{$doctor->id}}">Dr. {{ucWords($doctor->name)}}</option>
+                                <option value="{{$doctor->id}}">{{ __('Dr.') }} {{ucWords($doctor->name)}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -128,7 +128,7 @@
                                 <td>{{$app->ward_no}}</td>
                                 <td>{{$app->beds}}</td>
                                 <td>{{$app->free_beds}}</td>
-                                <td>Dr. {{ucWords(App\User::find($app->doctor_id)->name)}}</td>
+                                <td>{{ __('Dr.') }} {{ucWords(App\User::find($app->doctor_id)->name)}}</td>
                             </tr>
                             @endforeach
                         </tbody>

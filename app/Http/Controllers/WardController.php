@@ -31,9 +31,9 @@ class WardController extends Controller
         $ward->free_beds=$request->free_beds;
         try {
             $ward->save();
-            return redirect()->back()->with('success',"New Ward Added Success.");
+            return redirect()->back()->with('success',__("New Ward Added Success."));
         } catch (\Throwable $th) {
-            return redirect()->back()->with('fail',"Error Occured!");
+            return redirect()->back()->with('fail',__("Error Occured!"));
         }
     }
 

@@ -32,7 +32,7 @@ class PatientController extends Controller
     public function inPatientReport()
     {
 
-        return view('patient.inpatient.inpatients', ["date"=>null,"title" => "Inpatient Details", "data_count" => 0]);
+        return view('patient.inpatient.inpatients', ["date"=>null,"title" => __("Inpatient Details"), "data_count" => 0]);
 
     }
 
@@ -40,10 +40,10 @@ class PatientController extends Controller
     {
         $data=DB::table('inpatients')->whereDate('created_at', '=', $request->date)->get();
         if($data->count()>0){
-            return view('patient.inpatient.inpatients', ["title" => "Inpatient Details","date"=>$request->date,"data_count"=>$data->count(), "data" => $data]);
+            return view('patient.inpatient.inpatients', ["title" => __("Inpatient Details"),"date"=>$request->date,"data_count"=>$data->count(), "data" => $data]);
 
         }else{
-            return redirect(route("inPatientReport"))->with('fail',"No Results Found");
+            return redirect(route("inPatientReport"))->with('fail',__("No Results Found"));
         }
       
     }
@@ -129,7 +129,7 @@ class PatientController extends Controller
         if ($request->cat == "telephone") {
             $result = Patients::withTrashed()->where('telephone', 'LIKE', '%' . $request->keyword . '%')->get();
         }
-        return view('patient.search_patient_view', ["title" => "Search Results", "old_keyword" => $request->keyword, "search_result" => $result]);
+        return view('patient.search_patient_view', ["title" => __("Search Results"), "old_keyword" => $request->keyword, "search_result" => $result]);
     }
 
     public function registerPatient(Request $request)
@@ -234,7 +234,7 @@ class PatientController extends Controller
         $appointment = Appointment::where('number', $request->appNum)->where('created_at', '>=', date('Y-m-d') . ' 00:00:00')->where('patient_id', $request->pid)->orderBy('created_at', 'desc')->first();
 
         if ($appointment->completed == "YES") {
-            return redirect()->route('check_patient_view')->with('fail', "This Appointment Has Already Been Channeled.");
+            return redirect()->route('check_patient_view')->with('fail', __("This Appointment Has Already Been Channeled."));
         }
 
         $patient = Patients::find($appointment->patient_id);
@@ -536,7 +536,7 @@ class PatientController extends Controller
         Ward::where('ward_no', $request->reg_ipwardno)->update(['free_beds' => $newFB]);
 
       
-        return redirect()->back()->with('regpsuccess', "Inpatient Successfully Registered");
+        return redirect()->back()->with('regpsuccess', __("Inpatient Successfully Registered"));
     }
 
     public function get_ward_list()
@@ -600,7 +600,7 @@ class PatientController extends Controller
         $newFB = $getFB->free_beds+=1;
         Ward::where('ward_no', $wardNo)->update(['free_beds' => $newFB]);
 
-        return view('patient.discharge_recipt',compact('INPtableUpdate'))->with('regpsuccess', "Inpatient Successfully Discharged");;
+        return view('patient.discharge_recipt',compact('INPtableUpdate'))->with('regpsuccess', __("Inpatient Successfully Discharged"));;
         // }
         // catch(\Throwable $th){
         //     return redirect()->back()->with('error',"Unkown Error Occured");
@@ -690,11 +690,11 @@ public function addChannel(Request $request)
             activity()->performedOn($user)->log('Patient details updated!');
             return redirect()
                 ->route('searchPatient')
-                ->with('success', 'You have successfully updated patient details.');
+                ->with('success', __('You have successfully updated patient details.'));
         } else {
             return redirect()
                 ->route('searchPatient')
-                ->with('unsuccess', 'Error in Updating details !!!');
+                ->with('unsuccess', __('Error in Updating details !!!'));
         }
 
     }

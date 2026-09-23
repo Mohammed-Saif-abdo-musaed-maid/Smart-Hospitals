@@ -7,8 +7,8 @@
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{__('Dashboard')}}</a></li>
+    <li class="active">{{__('Here')}}</li>
 </ol>
 @endsection
 @section('main_content')
@@ -25,7 +25,7 @@
                 <form class="pl-5 pr-5 pb-5" method="get" action="{{route('patientProfileIntro')}}">
                     @csrf
                     <h3>{{__('Enter Patient Registration Number')}}</h3>
-                    <input name="pid" id="pid" class="form-control input-lg" type="number" placeholder="Patient Registration Number">
+                    <input name="pid" id="pid" class="form-control input-lg" type="number" placeholder="{{ __('Patient Registration Number') }}">
                     <input id="btn_submit" type="submit" class="btn btn-primary btn-lg mt-3 text-center"
                         value={{__("View Profile")}}>
                 </form>
@@ -34,7 +34,7 @@
         @if (session()->has('fail'))
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-ban"></i> {{_('Invalid Registration Number!')}}</h4>
+            <h4><i class="icon fa fa-ban"></i> {{__('Invalid Registration Number!')}}</h4>
 
             {{session()->get('fail')}}
         </div>

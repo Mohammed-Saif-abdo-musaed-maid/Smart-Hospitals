@@ -3,14 +3,16 @@
 $name = ucwords($user->name);
 $user_type = ucfirst($user->user_type);
 $image_path = $user->img_path;
-$outlet = 'Rural Ayruvedic Hospital Kesbawa';
+$outlet = 'مستشفى الشفاء';
 \App::setLocale(Session::get('locale'));
+$app_locale = \App::getLocale();
+$is_rtl = ($app_locale === 'ar');
 ?>
 
 
 <!DOCTYPE html>
 
-<html>
+<html lang="{{ $app_locale }}" dir="{{ $is_rtl ? 'rtl' : 'ltr' }}">
 
 <head>
     <meta charset="utf-8">
@@ -65,6 +67,9 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
 
     @yield('custom_style_sheets')
     <link rel="stylesheet" href="{{ URL::asset('/css/bsutility.css') }}">
+    @if($is_rtl)
+    <link rel="stylesheet" href="{{ asset('css/rtl.css') }}">
+    @endif
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
@@ -249,7 +254,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                 <!-- mini logo for sidebar mini 50x50 pixels -->
                 <span class="logo-mini">HMS</span>
                 <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg">Smart Hospitals</span>
+                <span class="logo-lg">مستشفى الشفاء</span>
             </a>
 
             <!-- Header Navbar -->
@@ -257,7 +262,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                 <!-- Sidebar toggle button-->
                 <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
                     <i class="fas fa-sliders-h"></i>
-                    <span class="sr-only">Toggle Navigation</span>
+                    <span class="sr-only">{{ __('Toggle Navigation') }}</span>
                 </a>
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
@@ -272,19 +277,22 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
 
                         <li class="dropdown messages-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                @if(\Session::get('locale')=='si')
+                                @if(\App::getLocale()=='si')
                                 සිං
+                                @elseif(\App::getLocale()=='ar')
+                                ع
                                 @else
                                 EN
                                 @endif
 
                             </a>
                             <ul class="dropdown-menu">
-                                <li class="header">Select The Language</li>
+                                <li class="header">{{ __('Select The Language') }}</li>
                                 <li>
                                     <ul class="menu">
-                                        <li><a class="text-muted" href="{{route('lang','en')}}">English</a></li>
+                                        <li><a class="text-muted" href="{{route('lang','en')}}">{{__('English')}}</a></li>
                                         <li><a class="text-muted" href="{{route('lang','si')}}">සිංහල</a></li>
+                                        <li><a class="text-muted" href="{{route('lang','ar')}}">العربية</a></li>
                                     </ul>
                                 </li>
 
@@ -318,14 +326,14 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                                 <!-- Menu Footer-->
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{{route('profile')}}" class="btn btn-default btn-flat">Profile</a>
+                                        <a href="{{route('profile')}}" class="btn btn-default btn-flat">{{ __('Profile') }}</a>
                                     </div>
 
                                     <div class="pull-right">
                                         <form id="logout-form" action="{{ route('logout') }}" method="POST">
                                             @csrf
                                             <input type="submit" href="#" class="btn btn-default btn-flat"
-                                                value="Sign Out">
+                                                value="{{ __('Sign Out') }}">
                                         </form>
 
                                     </div>
@@ -351,14 +359,14 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                     <div class="pull-left info">
                         <p>{{$name}}</p>
                         <!-- Status -->
-                        <a href="#"><i class="fas fa-circle text-success"></i> Online</a>
+                        <a href="#"><i class="fas fa-circle text-success"></i> {{ __('Online') }}</a>
                     </div>
                 </div>
 
                 <!-- Sidebar Menu -->
 
                 <ul class="sidebar-menu" data-widget="tree">
-                    <li class="header">Main Menu</li>
+                    <li class="header">{{ __('Main Menu') }}</li>
 
                     @yield('sidebar_content')
 
@@ -400,7 +408,7 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
                 Version 1.0
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; {{date('Y')}} <a href="#">Smart Hospital Systems</a>.</strong> All rights reserved.
+            <strong>Copyright &copy; {{date('Y')}} <a href="#">Smart Hospital Systems</a>.</strong> {{ __('All rights reserved.') }}
         </footer>
 
 
@@ -424,7 +432,28 @@ $outlet = 'Rural Ayruvedic Hospital Kesbawa';
     <script src="{{asset('bower_components/datatables.net/js/jquery.dataTables.min.js')}}"></script>
     <script src="{{asset('bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js')}}"></script>
     <script src="{{asset('bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
-
+    @if($is_rtl)
+    <script>
+        $.fn.dataTable.defaults.language = {
+            "emptyTable": "{{ __('Empty table') }}",
+            "info": "{{ __('Showing _START_ to _END_ of _TOTAL_ entries') }}",
+            "infoEmpty": "{{ __('Showing 0 to 0 of 0 entries') }}",
+            "infoFiltered": "({{ __('filtered from _MAX_ total entries') }})",
+            "infoThousands": ",",
+            "lengthMenu": "{{ __('Show _MENU_ entries') }}",
+            "loadingRecords": "{{ __('Loading...') }}",
+            "processing": "{{ __('Processing...') }}",
+            "search": "{{ __('Search:') }}",
+            "zeroRecords": "{{ __('No matching records found') }}",
+            "paginate": {
+                "first": "{{ __('First') }}",
+                "last": "{{ __('Last') }}",
+                "next": "{{ __('Next') }}",
+                "previous": "{{ __('Previous') }}"
+            }
+        };
+    </script>
+    @endif
     @yield('optional_scripts')
 
 </body>

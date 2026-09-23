@@ -2,11 +2,25 @@
 
 > أحدث تحديث يظهر أولاً
 
-## المرحلة 2 — الترقية الشاملة للكود والـ DB (COMPLETED ✅)
+## المرحلة 2 — الترقية الشاملة للكود والـ DB (COMPLETED ✅) + التحقق النهائي
 - **تاريخ**: 2026-09-23
 - **المدخلات**: Laravel 10.50.3 | PHPUnit 10.5.65 | MariaDB 12.0.2
 
-### المنجز
+### إصلاحات إضافية — جلسة التحقق النهائي
+- **`/reportgeneration`** (ميتة 500) — بإذن المستخدم: `Route::redirect('/reportgeneration', '/clinicreports')->middleware('auth')` → تحقق حي 302 → /clinicreports. **مُرفقة في commit 1152d7f**.
+- **`/emails`** (ميتة؛ `UserController@email($data,$emaillist)` بلا Request → 500 عند الزيارة المباشرة، لا رابط فيها) — `Route::redirect('/emails', '/createnoticeview')->middleware('auth')`.
+- **`/outpreport`** (ميتة؛ العرض `reports/out_patient_report` غير موجود أبداً — لا في git ولا في backup، route غير موصولة بأي رابط) — `Route::redirect('/outpreport', '/attendancereport')->middleware('auth')` → **تحقق حي 302 → /attendancereport → 200**.
+- **تم تثبيت laravel/framework على 10.x-dev@74e222c** مُقفَل في composer.lock (يُبلّغ version 10.50.3 عبر `artisan --version`) — تثبيت قابل للتكرار تماماً (مرجع محدد في lock).
+
+### فحص البطارية النهائي (كلها ناجحة)
+- `composer install` ✓ (بلا تغييرات ضد lock) | `php -l` على كل ملفات app/config/routes/database ✓ (ALL PHP LINT OK) | لا `${var}` interpolation deprecated ✓
+- `optimize:clear` + `config:clear` + `route:clear` + `view:clear` ✓ | `view:cache` ✓
+- `migrate:status --database=mysql` → **15/15 Ran** (Batch 1-3) ✓
+- `php artisan test` → **2 passed (4 assertions)** ✓
+- `php artisan route:list` → **82 مسار فعلي**، كلها موجودة ✓ | `/reportgeneration`+`/emails`+`/outpreport` تظهر كـ RedirectController
+- Smoke حي: 21+ صفحة 200 (عبر الدخول بـ admin)، `/attendance`→302 قصدية، `/wardreport`/`/mobclinicreport`/`/clinicreports`/`/monstatreport`/`/attendancereport`/`/in-reports` كلها 200 ✓
+
+### المنجز (من الجلسة السابقة)
 1. **`.env.example` + `.env` + `key:generate`** — `APP_NAME="Hospital Management System"` (مقتبس للمسافات)، `DB_DATABASE=hms_test`، `DB_USERNAME=root`، `DB_PASSWORD=123456`، `SESSION_DRIVER=database`، `MAIL_MAILER=log`.
 2. **Auth traits** — لم تعد في Laravel 10 core → `laravel/ui:^4.6.3` (يعرّف PSR-4 `Illuminate\Foundation\Auth\` فيوفر AuthenticatesUsers/RegistersUsers/SendsPasswordResetEmails/ResetsPasswords/VerifiesEmails). بدون تشغيل `php artisan ui`.
 3. **Controllers** — إصلاحات خلال هذا الجلسة:
@@ -47,7 +61,7 @@
 - معدّل: `config/app.php` (alias Active), `config/mail.php` (بنية L10), `app/Http/Middleware/TrustProxies.php`, `app/Http/Controllers/{PatientController,LoginController,UserController,NoticeboardController,AttendController}.php`, 6 ملفات migrations, `database/seeders/DatabaseSeeder.php` (الترتيب), `composer.json` (phpunit ^10.1), `phpunit.xml`, `tests/Feature/ExampleTest.php`
 
 ### commit
-- *(يُرفع عند تأكيد المستخدم — التغييرات جاهزة للstage 2 commit)*
+- *(مُرفع كـ `1152d7f` — بعد موافقة المستخدم على إصلاح `/reportgeneration`)*
 
 ---
 
@@ -79,11 +93,13 @@
 - `app/Exceptions/Handler.php` (نمط Laravel 10)
 
 ### commit
-- `d509298` baseline (سابق)
-- *(المرحلة الجارية سيُرفع commit بعد اكتمال خطواتها)*
+- `d509298` baseline
+- `dd65ed8` stage1: laravel 10 deps + bootstrap fixes
+- `1152d7f` stage2: app code, migrations, seeders, phpunit10 (شمل `/reportgeneration` redirect)
+- *ملاحظة: توجيهات `/emails` و`/outpreport` في `routes/web.php` عالقة بلا commit — بانتظار طلب المستخدم*
 
 ---
 
 ## المراحل القادمة
-- [ ] **المرحلة 3** — `UPGRADE_REPORT.md` النهائي + commit للتغييرات المرحلة 1+2 + تعليمات التشغيل (إن لم يُطلب أكثر).
-- [ ] (اختياري) إصلاح المسارات الميتة `/reportgeneration` و`/emails` بموافقة المستخدم.`
+- [ ] **المرحلة 3** — `UPGRADE_REPORT.md` النهائي مكتوب ✅ (انظر الملف) + commit للتغييرات العالقة إن طُلب (لا يُرفع إلا بطلب صريح).
+- [ ] (اختياري) الانتقال لاحقاً إلى Laravel 11/12 إن رغب (PHP 8.2 يدعم؛ يزيل 3 advisories security غير المتاحة لـ Laravel 10 EOL).

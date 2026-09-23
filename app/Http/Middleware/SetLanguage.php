@@ -15,7 +15,14 @@ class SetLanguage
      */
     public function handle($request, Closure $next)
     {
-        \App::setLocale( \Session::get('locale'));
+        $locale = \Session::get('locale');
+
+        if (!is_string($locale) || !in_array($locale, ['en', 'si', 'ar'])) {
+            $locale = config('app.locale');
+        }
+
+        \App::setLocale($locale);
+
         return $next($request);
     }
 }

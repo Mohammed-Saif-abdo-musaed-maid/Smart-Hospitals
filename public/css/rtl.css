@@ -1,0 +1,121 @@
+/* ============================================================
+   Arabic RTL support for Hospital Management System
+   Loaded only when locale is 'ar'
+   Does not redesign anything; only mirrors the LTR layout.
+   ============================================================ */
+
+[dir="rtl"] {
+    direction: rtl;
+    text-align: right;
+}
+
+[dir="rtl"] .wrapper {
+    direction: rtl;
+}
+
+/* ---------- Text alignment helpers ---------- */
+[dir="rtl"] .text-left, [dir="rtl"] .pull-left { text-align: right; }
+[dir="rtl"] .text-right, [dir="rtl"] .pull-right { text-align: left; }
+
+/* ---------- Sidebar ---------- */
+[dir="rtl"] .main-sidebar { right: 0; left: auto; }
+[dir="rtl"] .sidebar-mini.sidebar-collapse .main-sidebar { margin-right: 0; }
+[dir="rtl"] .sidebar-menu > li > a { border-right: none; border-left: 3px solid transparent; }
+[dir="rtl"] .sidebar-menu .treeview-menu { padding-left: 0; padding-right: 0; }
+[dir="rtl"] .sidebar-menu .treeview-menu > li > a { padding-left: 5px; padding-right: 40px; }
+
+/* ---------- Content wrapper ---------- */
+[dir="rtl"] .content-wrapper, [dir="rtl"] .main-footer {
+    margin-left: 0;
+    margin-right: 230px;
+}
+
+@media (max-width: 767px) {
+    [dir="rtl"] .content-wrapper, [dir="rtl"] .main-footer { margin-right: 0; }
+}
+
+/* ---------- Header ---------- */
+[dir="rtl"] .main-header .navbar { margin-left: 0; margin-right: 230px; }
+@media (max-width: 767px) {
+    [dir="rtl"] .main-header .navbar { margin-right: 0; }
+}
+[dir="rtl"] .main-header .logo { float: right; }
+[dir="rtl"] .main-header .navbar-custom-menu { float: left; }
+[dir="rtl"] .main-header .navbar-static-top { float: left; }
+
+/* ---------- Sidebar toggle ---------- */
+[dir="rtl"] .sidebar-toggle { float: right; }
+
+/* ---------- Navbar items ---------- */
+[dir="rtl"] .navbar-custom-menu > .navbar-nav { float: right; margin-right: 0; }
+[dir="rtl"] .navbar-custom-menu .navbar-nav > li { float: right; }
+
+/* ---------- User panel in sidebar ---------- */
+[dir="rtl"] .user-panel > .image { float: right; margin-left: 10px; margin-right: 0; }
+[dir="rtl"] .user-panel > .info { float: right; padding-right: 60px; padding-left: 0; }
+
+/* ---------- Boxes / forms ---------- */
+[dir="rtl"] .form-horizontal .control-label { text-align: left; }
+[dir="rtl"] .box-footer .pull-right { float: left !important; }
+[dir="rtl"] .box-footer .pull-left { float: right !important; }
+[dir="rtl"] .input-group .input-group-addon:first-child,
+[dir="rtl"] .input-group > .form-control:first-child {
+    border-radius: 0 4px 4px 0;
+    border-left: 0;
+    border-right: 1px solid #d2d6de;
+}
+[dir="rtl"] .input-group .form-control:last-child,
+[dir="rtl"] .input-group-addon:last-child {
+    border-radius: 4px 0 0 4px;
+}
+
+/* ---------- Breadcrumbs ---------- */
+[dir="rtl"] .breadcrumb { float: right; padding: 7px 25px 7px 0; }
+[dir="rtl"] .breadcrumb > li + li:before {
+    content: "\f104";
+    font-family: 'FontAwesome';
+    padding: 0 5px;
+    color: #ccc;
+}
+
+/* ---------- Dropdown menus ---------- */
+[dir="rtl"] .navbar-nav > .dropdown-menu { left: 0; right: auto; }
+[dir="rtl"] .dropdown-menu > li > a { text-align: right; }
+[dir="rtl"] .user-menu > .dropdown-menu { left: 0; right: auto; }
+[dir="rtl"] .main-header .navbar-right .dropdown-menu { left: 0; right: auto; }
+[dir="rtl"] .messages-menu > .dropdown-menu { left: 0; right: auto; }
+
+/* ---------- Tables ---------- */
+[dir="rtl"] table.dataTable thead .sorting:after,
+[dir="rtl"] table.dataTable thead .sorting_asc:after,
+[dir="rtl"] table.dataTable thead .sorting_desc:after {
+    right: auto;
+    left: 8px;
+}
+[dir="rtl"] .dataTables_wrapper .dataTables_filter { float: left; }
+[dir="rtl"] .dataTables_wrapper .dataTables_length { float: right; }
+[dir="rtl"] .dataTables_wrapper .dataTables_info { float: right; padding-top: 0.55em; }
+
+/* ---------- Buttons in groups ---------- */
+[dir="rtl"] .btn-group > .btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    border-radius: 0 4px 4px 0;
+}
+[dir="rtl"] .btn-group > .btn:last-child:not(:first-child), 
+[dir="rtl"] .btn-group > .dropdown-toggle:not(:first-child) {
+    border-radius: 4px 0 0 4px;
+}
+
+/* ---------- Tabs ---------- */
+[dir="rtl"] .nav-tabs-custom > .nav-tabs > li { float: right; }
+
+/* ---------- Misc fixes ---------- */
+[dir="rtl"] .checkbox, [dir="rtl"] .radio { padding-right: 20px; padding-left: 0; }
+[dir="rtl"] .checkbox label, [dir="rtl"] .radio label { padding-right: 0; }
+
+[dir="rtl"] .modal-title { text-align: right; }
+[dir="rtl"] .modal-body { text-align: right; }
+
+[dir="rtl"] .pagination { direction: ltr; }
+[dir="rtl"] .pagination > li { float: right; }
+
+[dir="rtl"] label { text-align: right; }

@@ -1,5 +1,10 @@
 <!doctype html>
-<html lang="en">
+@php
+\App::setLocale(Session::get('locale'));
+$app_locale = \App::getLocale();
+$is_rtl = ($app_locale === 'ar');
+@endphp
+<html lang="{{ $app_locale }}" dir="{{ $is_rtl ? 'rtl' : 'ltr' }}">
 
 <head>
     <!-- Required meta tags -->
@@ -12,7 +17,11 @@
 
     <script src="https://kit.fontawesome.com/af9fc7310f.js"></script>
 
-    <title>Print Attendance</title>
+    <title>{{ __('Print Attendance') }}</title>
+
+    @if($is_rtl)
+    <link rel="stylesheet" href="{{ asset('css/rtl.css') }}">
+    @endif
 
     <style>
         @media print {
@@ -32,21 +41,21 @@
             <div class="row">
                 <div class="col-md-3">
                     <button onclick="window.history.back()" class="mt-5 btn-sm btn btn-success no-print"><i
-                            class="fa fa-arrow-left"></i> Back
+                            class="fa fa-arrow-left"></i> {{ __('Back') }}
                     </button>
-                    <button onclick="window.print()" class="mt-5 btn-sm btn btn-warning no-print">Print <i
+                    <button onclick="window.print()" class="mt-5 btn-sm btn btn-warning no-print">{{ __('Print') }} <i
                             class="fas fa-print"></i></button>
-                    <button onclick="HTMLtoPDF()" class="mt-5 btn-sm btn btn-danger no-print">Download PDF</button>
+                    <button onclick="HTMLtoPDF()" class="mt-5 btn-sm btn btn-danger no-print">{{ __('Download PDF') }}</button>
                 </div>
             </div>
             <br>
 
             <div class="box" id="HTMLtoPDF">
-                <h2 align="center">CENTRAL HOSPITAL OF AYRVEDA</h2>
-                <h4 align="center">Attendance Report</h4>
+                <h2 align="center">{{ __('CENTRAL HOSPITAL OF AYRVEDA') }}</h2>
+                <h4 align="center">{{ __('Attendance Report') }}</h4>
 
                 <br>
-                <label>Date : @php echo date('Y/m/d'); @endphp</label>
+                <label>{{ __('Date :') }} @php echo date('Y/m/d'); @endphp</label>
                 <br>
                 <br>
 
@@ -56,10 +65,10 @@
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Type</th>
-                                    <th scope="col">Attend Dates</th>
-                                    <th scope="col">Short Leave</th>
+                                    <th scope="col">{{ __('Name') }}</th>
+                                    <th scope="col">{{ __('Type') }}</th>
+                                    <th scope="col">{{ __('Attend Dates') }}</th>
+                                    <th scope="col">{{ __('Short Leave') }}</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -73,20 +82,20 @@
                                 @endforeach
                             </tbody>
                             <tfoot>
-                                <th>Name</th>
-                                <th>Type</th>
-                                <th>Attend Dates</th>
-                                <th>Short Leave</th>
+                                <th>{{ __('Name') }}</th>
+                                <th>{{ __('Type') }}</th>
+                                <th>{{ __('Attend Dates') }}</th>
+                                <th>{{ __('Short Leave') }}</th>
                             </tfoot>
                         </table>
                     </div>
                 </div>
 
                 <br>
-                <label>Made By : {{$title}}</label>
+                <label>{{ __('Made By :') }} {{$title}}</label>
                 <div align="right">
                     <label style="display:block">...............................................................</label>
-                    <label>Sighned By , Officer</label>
+                    <label>{{ __('Sighned By , Officer') }}</label>
                 </div>
                 <br>
                 <br>

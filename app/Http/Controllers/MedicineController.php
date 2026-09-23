@@ -52,7 +52,7 @@ class MedicineController extends Controller
             $medicines=Prescription_Medicine::where('prescription_id',$request->presid)->get();
             return view('medicine.receipt',compact('presc','medicines'));
         } catch (\Throwable $th) {
-           return redirect()->back()->with('error',"Unkown Error Occured");
+           return redirect()->back()->with('error',__("Unkown Error Occured"));
         }
         
     }

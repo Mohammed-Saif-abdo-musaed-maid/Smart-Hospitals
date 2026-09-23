@@ -2,13 +2,13 @@
 
 @section('title', $title)
 
-@section('content_title',"More Attendance")
-@section('content_description',"Get Detailed Reports Of Attendance Of All Users")
+@section('content_title',__("More Attendance"))
+@section('content_description',__("Get Detailed Reports Of Attendance Of All Users"))
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{__('Dashboard')}}</a></li>
+    <li class="active">{{__('Here')}}</li>
 </ol>
 @endsection
 
@@ -67,7 +67,7 @@
                     strokeWidth: 2
                 }
             },
-            title: "Attendance",
+            title: "{{ __('Attendance') }}",
             colorAxis: {
                 colors: ['#f25555', '#edf255', '#55b6f2', '#55f27f'],
                 // colors: ['present', 'halfday','holliday','absent'],
@@ -84,7 +84,7 @@
 </script>
 <div class="box box-info" data-select2-id="14">
     <div class="box-header with-border">
-        <h3 class="box-title">Get Attendance By User ID</h3>
+        <h3 class="box-title">{{__('Get Attendance By User ID')}}</h3>
 
         <div class="box-tools pull-right">
             <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
@@ -105,7 +105,7 @@
                         </select>
                     </div>
                     <div class="col-xs-3">
-                        <input type="submit" class="form-control btn btn-success" value="Find">
+                        <input type="submit" class="form-control btn btn-success" value="{{ __('Find') }}">
                     </div>
                 </form>
 
@@ -130,9 +130,7 @@
                     <div class="row">
                         <div class="w-100" id="calendar_basic" style="height:25rem"></div>
                         <div class="col-md-9">
-                            <p><span class="text-red">*</span>Hours You Worked Are Displayed In The Calander.The Color
-                                Changes
-                                With The Number Of Hours.</p>
+                            <p><span class="text-red">*</span>{{__('Hours You Worked Are Displayed In The Calander.The Color Changes With The Number Of Hours.')}}</p>
                         </div>
 
                     </div>

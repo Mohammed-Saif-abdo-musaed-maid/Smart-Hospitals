@@ -7,8 +7,8 @@
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{__('Dashboard')}}</a></li>
+    <li class="active">{{__('Here')}}</li>
 </ol>
 @endsection
 @section('main_content')
@@ -52,7 +52,7 @@ function validateNum(appNum){
         }else{
             $("#details").fadeOut();
             $("#btn-submit").attr("disabled","disabled");
-            $("#validation").text("Invalid Appointment Number Or Patient Number. Check Again...");
+            $("#validation").text("{{ __('Invalid Appointment Number Or Patient Number. Check Again...') }}");
             $("#appNum").focus();
         }
     }
@@ -73,16 +73,16 @@ function validateNum(appNum){
                     @csrf
                     <h3>{{__('Enter Appointment Number Or Patient Number To Begin')}}</h3>
                     <input id="appNum" class="form-control input-lg" type="number" onchange="validateNum(this.value)"
-                        placeholder="Appointment Number Or Patient Number">
+                        placeholder="{{ __('Appointment Number Or Patient Number') }}">
                     <input disabled id="btn_submit" type="submit" class="btn btn-primary btn-lg mt-3 text-center"
                         value={{__("Check Patient")}}>
                     <input name="pid" type="hidden" id="pnum">
                     <input name="appNum" type="hidden" id="appt_num_1">
                     <p id="validation" class="mt-2 text-danger"></p>
                     <div style="display:none" id="details">
-                        <h4>Patient Name : <span id="p_name"></span></h4>
-                        <h4>Appointment &nbsp;: <span id="appt_num"></span></h4>
-                        <h4>Your Finger Print &nbsp;: <span id="finger"></span></h4>
+                        <h4>{{__('Patient Name')}} : <span id="p_name"></span></h4>
+                        <h4>{{__('Appointment')}} &nbsp;: <span id="appt_num"></span></h4>
+                        <h4>{{__('Your Finger Print')}} &nbsp;: <span id="finger"></span></h4>
                     </div>
                 </form>
             </div>
@@ -90,7 +90,7 @@ function validateNum(appNum){
         @if (session()->has('fail'))
         <div class="alert alert-danger alert-dismissible">
             <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-            <h4><i class="icon fa fa-ban"></i> Already Channeld!</h4>
+            <h4><i class="icon fa fa-ban"></i> {{__('Already Channeld!')}}</h4>
 
             {{session()->get('fail')}}
         </div>

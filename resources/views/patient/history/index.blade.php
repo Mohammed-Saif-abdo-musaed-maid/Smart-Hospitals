@@ -1,6 +1,6 @@
 @extends('template.plain')
 @section('content_title')
-Patient Treatment History
+{{ __('Patient Treatment History') }}
 @endsection
 @section('title', $title)
 @php
@@ -44,7 +44,7 @@ use App\Clinic;
                         <div class="description-block">
                             <h5 class="description-header"><span class="@if($status=='Active') text-green @else
                                     text-danger @endif">{{$status}}</span></h5>
-                            <span class="description-text">Status</span>
+                            <span class="description-text">{{ __('Status') }}</span>
                         </div>
                         <!-- /.description-block -->
                     </div>
@@ -52,7 +52,7 @@ use App\Clinic;
                     <div class="col-xs-4 border-right">
                         <div class="description-block">
                             <h5 class="description-header">{{$hospital_visits}}</h5>
-                            <span class="description-text">HOSPITAL VISITS</span>
+                            <span class="description-text">{{ __('HOSPITAL VISITS') }}</span>
                         </div>
                         <!-- /.description-block -->
                     </div>
@@ -60,7 +60,7 @@ use App\Clinic;
                     <div class="col-xs-4">
                         <div class="description-block">
                             <h5 class="description-header">{{$last_seen}}</h5>
-                            <span class="description-text">LAST VISIT</span>
+                            <span class="description-text">{{ __('LAST VISIT') }}</span>
                         </div>
                         <!-- /.description-block -->
                     </div>
@@ -78,7 +78,7 @@ use App\Clinic;
 @if ($clinics=$patient->clinics->count()>0)
 <div class="row mb-4">
     <div class="col-md-12">
-        <h3>Attending Clinics</h3>
+        <h3>{{ __('Attending Clinics') }}</h3>
         @foreach ($patient->clinics as $clinic)
         <span style="display:inline-block;font-size:15px" class="mt-2 mb-2 badge bg-navy">{{$clinic->name_eng}}</span>
         @endforeach
@@ -92,7 +92,7 @@ use App\Clinic;
         @foreach ($prescs as $presc)
         <div id="presc{{$presc->id}}" class="box box-success collapsed-box">
             <div class="box-header with-border">
-                <h3 class="box-title">Visit On ({{explode(" ",$presc->created_at)[0]}})</h3>
+                <h3 class="box-title">{{ __('Visit On') }} ({{explode(" ",$presc->created_at)[0]}})</h3>
 
                 <div class="box-tools pull-right">
                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-plus"></i>
@@ -111,22 +111,22 @@ use App\Clinic;
                 $sugar=json_decode($presc->blood_sugar);
                 @endphp
 
-                <h4>Diagnosis</h4>
+                <h4>{{ __('Diagnosis') }}</h4>
                 <p class="text-primary" style="font-size:17px;font-weight:600">{{$presc->diagnosis}}</p>
 
-                <h4>Blood Pressure</h4>
-                <h5 class="text-primary" style="font-size:17px;font-weight:600">{{$bp->value}}<small> (Updated
+                <h4>{{ __('Blood Pressure') }}</h4>
+                <h5 class="text-primary" style="font-size:17px;font-weight:600">{{$bp->value}}<small> ({{ __('Updated') }}
                         {{explode(" ",$bp->updated)[0]}})</small></h5>
 
-                <h4>Blood Sugar</h4>
-                <h5 class="text-primary" style="font-size:17px;font-weight:600">{{$sugar->value}}<small> (Updated
+                <h4>{{ __('Blood Sugar') }}</h4>
+                <h5 class="text-primary" style="font-size:17px;font-weight:600">{{$sugar->value}}<small> ({{ __('Updated') }}
                         {{explode(" ",$sugar->updated)[0]}})</small></h5>
 
-                <h4>Blood Cholestrol</h4>
-                <h5 class="text-primary" style="font-size:17px;font-weight:600">{{$cholestrol->value}}<small> (Updated
+                <h4>{{ __('Blood Cholestrol') }}</h4>
+                <h5 class="text-primary" style="font-size:17px;font-weight:600">{{$cholestrol->value}}<small> ({{ __('Updated') }}
                         {{explode(" ",$cholestrol->updated)[0]}})</small></h5>
 
-                <h4>Issued Medicines</h4>
+                <h4>{{ __('Issued Medicines') }}</h4>
                 <ul style="font-size:16px">
                     @foreach($pres_med as $med)
                     <li>

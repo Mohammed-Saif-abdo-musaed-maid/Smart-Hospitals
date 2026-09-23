@@ -2,13 +2,13 @@
 
 @section('title', $title)
 
-@section('content_title',"Pharamacy")
-@section('content_description',"Issue Medicines here.")
+@section('content_title',__("Pharamacy"))
+@section('content_description',__("Issue Medicines here."))
 @section('breadcrumbs')
 
 <ol class="breadcrumb">
-    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>Dashboard</a></li>
-    <li class="active">Here</li>
+    <li><a href="{{route('dash')}}"><i class="fas fa-tachometer-alt"></i>{{__('Dashboard')}}</a></li>
+    <li class="active">{{__('Here')}}</li>
 </ol>
 @endsection
 @php
@@ -25,23 +25,23 @@ use App\Prescription_Medicine;
 <div class="col-xs-12" id="issuemedicine3">
     <div class="box">
         <div class="box-header">
-            <h3 class="box-title">Prescription</h3>
+            <h3 class="box-title">{{__('Prescription')}}</h3>
         </div>
         <div class="box-body">
             <table class="table table-striped table-bordered table-active">
                 <thead>
                     <tr>
                         
-                        <th scope="col" colspan="3" style="text-align:center;font-size:18px">Medicine</th>
-                        <th scope="col" style="text-align:center;vertical-align:middle;font-size:18px" rowspan="2">Note
+                        <th scope="col" colspan="3" style="text-align:center;font-size:18px">{{__('Medicine')}}</th>
+                        <th scope="col" style="text-align:center;vertical-align:middle;font-size:18px" rowspan="2">{{__('Note')}}
                         </th>
                         <th scope="col" style="text-align:center;vertical-align:middle;font-size:18px" rowspan="2">
-                            Issued or Not</th>
+                            {{__('Issued or Not')}}</th>
                     </tr>
                     <tr>
-                        <th>Medicine ID</th>
-                        <th style="text-align:center;font-size:18px">English</th>
-                        <th style="text-align:center;font-size:18px">Sinhala</th>
+                        <th>{{__('Medicine ID')}}</th>
+                        <th style="text-align:center;font-size:18px">{{__('English')}}</th>
+                        <th style="text-align:center;font-size:18px">{{__('Sinhala')}}</th>
                     </tr>
                 </thead>
                 <tbody id="bodyData">
@@ -57,11 +57,11 @@ use App\Prescription_Medicine;
                         <td style="text-align:center;font-size:15px;">{{ $med->note }}</td>
                         <td id="td-issue-{{$med->id}}" style="text-align:center;">
                             @if ($med->issued=="YES")
-                            <span style="font-size:14px" class="badge bg-green"><i class="fas fa-check"></i> Issued
+                            <span style="font-size:14px" class="badge bg-green"><i class="fas fa-check"></i> {{__('Issued')}}
                             </span>
                             @else
                             <button style="font-size:18px;" id="btn-issue-{{$med->id}}"
-                                onclick="issueMedicine('{{$med->id}}')" class='btn bg-navy btn-lg'>Issue</button>
+                                onclick="issueMedicine('{{$med->id}}')" class='btn bg-navy btn-lg'>{{__('Issue')}}</button>
                             @endif
                         </td>
                     </tr>
@@ -73,12 +73,12 @@ use App\Prescription_Medicine;
 <div class="box box-info">
     <div class="box-header with-border">
     <div class="form-group">
-        <h3>Number of Medicine Types Issued Now</h3>
+        <h3>{{__('Number of Medicine Types Issued Now')}}</h3>
         <input type="text" id="medCount" readonly class="col-sm-2 form-control" value="{{Prescription_Medicine::where('prescription_id',$presid)->select('medicine_id')->count('medicine_id')}}">
     </div>
 <br>
     <div class="form-group">
-        <h3>Quantity of Each Medicine Issued Up To Now</h3>
+        <h3>{{__('Quantity of Each Medicine Issued Up To Now')}}</h3>
         {{-- for="medDisplay" class="col-sm-2"> --}}
         <table class="table table-striped table-bordered">
             <tbody>
@@ -106,12 +106,12 @@ use App\Prescription_Medicine;
                         <input type="hidden" name="presid" id="presid" value="{{$presid}}">
                         @if ($prescription->medicine_issued=="YES")
                        
-                        <input type="submit" id="btn-print" value="Print Receipt"
+                        <input type="submit" id="btn-print" value="{{ __('Print Receipt') }}"
                         class="btn pull-right mt-5 mb-2 btn-lg btn-primary">
-                        <p class="pull-left mt-5 pt-4">Note: This Prescription Is Already Marked As Issued</p>
+                        <p class="pull-left mt-5 pt-4">{{__('Note: This Prescription Is Already Marked As Issued')}}</p>
                         
                         @else
-                        <input type="submit" id="btn-print" value="Save & Print"
+                        <input type="submit" id="btn-print" value="{{ __('Save & Print') }}"
                         class="btn pull-right mt-5 mb-2 btn-lg btn-success">
                         @endif
                         
@@ -168,7 +168,7 @@ use App\Prescription_Medicine;
                 },
                 success: function (response) {
                   if(response.code==200){
-                      $("#td-issue-"+med_id).html('<span style="font-size:14px" class="badge bg-green"><i class="fas fa-check"></i> Issued </span>');
+                      $("#td-issue-"+med_id).html('<span style="font-size:14px" class="badge bg-green"><i class="fas fa-check"></i> {{ __('Issued') }} </span>');
                   }
                 }
         });

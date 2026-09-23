@@ -21,7 +21,7 @@ $email = $user->email;
 $tp = $user->contactnumber;
 $id = $user->id;
 
-$outlet = 'Rural Ayruvedic Hospital Kesbawa'?>
+$outlet = 'مستشفى الشفاء'?>
 
 <section class="content">
 
