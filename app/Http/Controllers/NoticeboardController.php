@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\User;
 use Validator;
-use Illuminate\Contracts\Validation\ValidationException;
-use Illuminate\Contracts\Validation;
 use Illuminate\Support\Facades\DB;
 
 

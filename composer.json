@@ -13,6 +13,7 @@
         "guzzlehttp/guzzle": "^7.5",
         "laravel/framework": "^10.10",
         "laravel/tinker": "^2.8",
+        "laravel/ui": "^4.0",
         "milon/barcode": "^10.0",
         "sendgrid/sendgrid": "^8.0",
         "spatie/laravel-activitylog": "^4.7",
@@ -22,7 +23,7 @@
         "fakerphp/faker": "^1.20",
         "mockery/mockery": "^1.5",
         "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^9.6"
+        "phpunit/phpunit": "^10.1"
     },
     "config": {
         "optimize-autoloader": true,

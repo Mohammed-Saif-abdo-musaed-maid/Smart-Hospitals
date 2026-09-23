@@ -1,6 +1,7 @@
 <?php
 
-use App\Attendance;
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 

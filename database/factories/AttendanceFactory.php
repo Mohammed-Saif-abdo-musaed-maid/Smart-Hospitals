@@ -1,15 +1,32 @@
 <?php
 
-/** @var \Illuminate\Database\Eloquent\Factory $factory */
+namespace Database\Factories;
 
 use App\Attendance;
-use Faker\Generator as Faker;
+use App\User;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Factories\Factory;
 
-$factory->define(Attendance::class, function (Faker $faker) {
-    return [
-        'user_id' => $faker->randomElement(App\User::pluck('id', 'id')->toArray()),
-        'start' => $faker->date('2019-m-d'),
-        'end' => Carbon::now()
-    ];
-});
+class AttendanceFactory extends Factory
+{
+    /**
+     * The name of the factory's corresponding model.
+     *
+     * @var string
+     */
+    protected $model = Attendance::class;
+
+    /**
+     * Define the model's default state.
+     *
+     * @return array
+     */
+    public function definition()
+    {
+        return [
+            'user_id' => User::pluck('id', 'id')->random(),
+            'start' => $this->faker->date('2019-m-d'),
+            'end' => Carbon::now(),
+        ];
+    }
+}

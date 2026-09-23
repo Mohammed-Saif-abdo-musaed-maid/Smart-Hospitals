@@ -1,7 +1,8 @@
 <?php
-use App\Appointment;
-use Illuminate\Support\Facades\DB;
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class AppointmentTableSeeder extends Seeder
 {

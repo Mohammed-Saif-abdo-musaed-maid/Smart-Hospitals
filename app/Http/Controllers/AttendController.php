@@ -57,7 +57,6 @@ class AttendController extends Controller
     {
         $ids = User::all();
         // $ids=DB::table('attendances')->select('user_id')->distinct()->get();
-        dd($ids);
         return view('attendance.more_attendance', ['title' => "More Attendance", 'ids' => $ids]);
     }
 

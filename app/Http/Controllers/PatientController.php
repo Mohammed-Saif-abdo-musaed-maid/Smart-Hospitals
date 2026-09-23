@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Appointment;
 use App\Clinic;
-use App\Http\Controllers\Redirect;
 use App\inpatient;
 use App\Medicine;
 use App\Patients;
@@ -22,6 +21,7 @@ use stdClass;
 class PatientController extends Controller
 {
     protected $wardArray;
+    protected $wardList;
 
     public function __construct()
     {
@@ -543,7 +543,7 @@ class PatientController extends Controller
     {
         $wardList = $this->wardList;
         $data=DB::table('wards')->join('users','wards.doctor_id','=','users.id')->select('*')->get();
-         return view('register_in_patient_view', ['data'=>$data]);
+         return view('patient.register_in_patient_view', ['data'=>$data, 'title' => "Register Inpatient", 'wardList' => $wardList]);
         // $wards = Ward::all();
         // dd($wardss);
         // return view('register_in_patient_view', compact(['wards']));

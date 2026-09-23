@@ -188,6 +188,7 @@ return [
 
     'aliases' => [
 
+        'Active' => App\Helpers\Active::class,
         'App' => Illuminate\Support\Facades\App::class,
         'Arr' => Illuminate\Support\Arr::class,
         'Artisan' => Illuminate\Support\Facades\Artisan::class,

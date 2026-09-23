@@ -18,7 +18,7 @@ class CreateInpatientsTable extends Migration
             $table->timestamps();
             $table->bigInteger('patient_id');
             $table->char('discharged',4)->default('NO'); // YES | NO
-            $table->bigInteger('ward_id');
+            $table->unsignedBigInteger('ward_id');
             $table->foreign('ward_id')->references('id')->on('wards');
             $table->date('discharged_date')->nullable();
             $table->string('description')->nullable();

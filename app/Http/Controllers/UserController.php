@@ -6,13 +6,10 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Validator;
-use Illuminate\Contracts\Validation\ValidationException;
-use Illuminate\Contracts\Validation;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\SendNotices;
 use Illuminate\Support\Facades\DB;
-use SebastianBergmann\Environment\Console;
 
 // require 'vendor/autoload.php';
 

@@ -16,12 +16,12 @@ class ClinicPatient extends Migration
         Schema::create('clinic_patient', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('patients_id');
-            $table->bigInteger('clinic_id');
+            $table->unsignedBigInteger('clinic_id');
             $table->foreign('clinic_id')->references('id')->on('clinics');
-            $table->foreign('patients_id')->references('id')->on('patient');
+            $table->foreign('patients_id')->references('id')->on('patients');
+            $table->unique(['patients_id', 'clinic_id']);
             $table->timestamps();
         });
-        DB::unprepared('ALTER TABLE clinic_patient ADD UNIQUE KEY(`patients_id`,`clinic_id`)');
     }
 
     /**

@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
-use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateAppointmentsTable extends Migration
 {
@@ -20,10 +19,14 @@ class CreateAppointmentsTable extends Migration
             $table->bigInteger('patient_id');
             $table->foreign('patient_id')->references('id')->on('patients')->onDelete('cascade');
             $table->integer('number');
-            $table->bigInteger('doctor_id')->nullable();
+            $table->unsignedBigInteger('doctor_id')->nullable();
             $table->char('admit',3)->default("NO");
             $table->char('completed',3)->default("NO");
             $table->foreign('doctor_id')->references('id')->on('users')->onDelete('cascade');
+        });
+
+        Schema::table('prescriptions', function (Blueprint $table) {
+            $table->foreign('appointment_id')->references('id')->on('appointments')->onDelete('cascade');
         });
     }
 

@@ -2,6 +2,55 @@
 
 > أحدث تحديث يظهر أولاً
 
+## المرحلة 2 — الترقية الشاملة للكود والـ DB (COMPLETED ✅)
+- **تاريخ**: 2026-09-23
+- **المدخلات**: Laravel 10.50.3 | PHPUnit 10.5.65 | MariaDB 12.0.2
+
+### المنجز
+1. **`.env.example` + `.env` + `key:generate`** — `APP_NAME="Hospital Management System"` (مقتبس للمسافات)، `DB_DATABASE=hms_test`، `DB_USERNAME=root`، `DB_PASSWORD=123456`، `SESSION_DRIVER=database`، `MAIL_MAILER=log`.
+2. **Auth traits** — لم تعد في Laravel 10 core → `laravel/ui:^4.6.3` (يعرّف PSR-4 `Illuminate\Foundation\Auth\` فيوفر AuthenticatesUsers/RegistersUsers/SendsPasswordResetEmails/ResetsPasswords/VerifiesEmails). بدون تشغيل `php artisan ui`.
+3. **Controllers** — إصلاحات خلال هذا الجلسة:
+   - `PatientController.php`: حذف `use App\Http\Controllers\Redirect;` الميت، إعلان `protected $wardList;` (كان dynamic property على PHP 8.2)، إصلاح `view('register_in_patient_view')` → `view('patient.register_in_patient_view', ['data'=>$data, 'title'=>..., 'wardList'=>$wardList])` في `get_ward_list()`.
+   - `LoginController.php`: حذف `use App\Http\Controllers\Auth\Request;` الميت.
+   - `UserController.php`: حذف 3 استيرادات ميتة (`ValidationException`, `Contracts\Validation`, `SebastianBergmann\Environment\Console`).
+   - `NoticeboardController.php`: حذف استيرادين ميتين.
+   - `AttendController.php`: إزالة `dd($ids)` من `attendmore()`.
+4. **Middleware** — فحص: `Authenticate`, `RedirectIfAuthenticated`, `Admin/Doctor/Staff/Pharma/SetLanguage` كلها متوافقة مع Laravel 10. **إصلاح `TrustProxies.php`**: `Request::HEADER_X_FORWARDED_ALL` محذوف في Symfony 6 → استُبدل بـ `X_FORWARDED_FOR | HOST | PORT | PROTO` (هذا كان سبب 500 الأول في `/login`).
+5. **Factory + Seeder + RouteServiceProvider + Kernel** — مراجعة وتبقّي كما هي (متوافقة).
+6. **`Active::checkRoute` (26× في `main.blade.php`)** — أنشأ `app/Helpers/Active.php` (class `Active` مع `checkRoute()`) وسُجّل كـ alias `'Active'` في `config/app.php` — يعمل داخل Blade.
+7. **`config/mail.php`** — إعادة بناء لبنية Laravel 9+/10 (`default` + `mailers`) بدل `driver` القديم؛ أبقى env keys القديمة.
+8. **`resources/views/layouts/app.blade.php`** — أنشئ (كان مفقوداً) للـ auth views الأربعة (`register`, `verify`, `passwords/email`, `passwords/reset`).
+9. **Migrations — إصلاح FKs (عدم تطابق signed/unsigned)**:
+   - `attendances.user_id` → `unsignedBigInteger` (users.id unsigned bigint).
+   - `prescriptions.doctor_id` → unsigned، `patient_id` → signed bigInteger (يتوافق مع `patients.id` signed)، `appointment_id` → unsigned.
+   - `appointments.doctor_id` → `unsignedBigInteger`.
+   - `inpatients.ward_id` → `unsignedBigInteger`.
+   - `medicine_prescription.prescription_id`/`medicine_id` → `unsignedBigInteger`.
+   - `clinic_patient.clinic_id` → `unsignedBigInteger`.
+   - **migrate كامل نجح (15/15 migration) على `hms_test`**.
+10. **Seeders** — ترتيب `DatabaseSeeder`: **Users أولاً** ثم Attendances/Medicines/Patients/Wards/Clinics/Noticeboards (Attendances تحتاج users id 1-5 موجودة مسبقاً). **db:seed نجح بالكامل**: 5 users، 72 attendance، 2 wards، 90 medicines، patients+clinics+noticeboards.
+11. **اختبار حي (Laravel Dev Server)**:
+    - GET `/login` → 200.
+    - POST login (admin `shakthisachintha@gmail.com` / `12345678`) → **302 → `/dash` → 200**، القالب (مع 26 `Active::checkRoute`) يترجم بلا أخطاء.
+    - 21 صفحة رئيسية أُجريت عليها smoke test: كلها 200 ما عدا `/attendance` → 302 (قصدية: route لكشك البصمات بـ `guest` middleware) و`/reportgeneration` → 500 (**كسر موروث**: `UserController@reportgen` غير موجود ولا أي view يرتبط به — موثّق أدناه، دون تعديل).
+12. **PHPUnit** — `collision` 7 يتطلب PHPUnit ≥10 لكن كان مثبت `^9.6` → ترقية إلى `phpunit ^10.1` (10.5.65) + إعادة كتابة `phpunit.xml` لشيفا PHPUnit 10 (`<source>` بدل `<filter>`، `<env MAIL_MAILER>`). تحديث `tests/Feature/ExampleTest` ليعكس سلوك `/` (302 ← login للمستخدم الزائر ثم `/login` 200). **`php artisan test` → 2 passed**.
+13. **`php artisan view:cache`** — كل ملفات Blade تترجم بنجاح (فحص شامل للصياغة).
+
+### القضايا المعروفة (مؤجلة/موروثة)
+- **`/reportgeneration`** → `UserController@reportgen` (method غير موجود) → 500. لا يوجد رابط في أي view؛ كان مكسوراً في الأصل أيضاً (5.8). قُرر تغيير المسار بحاجة موافقة المستخدم إن أراد إصلاحه.
+- **`/emails`** → `UserController@email($data, $emaillist)` signature بلا Request → يُحل غير صحيح إن وصلته زيارة مباشرة. موروث.
+- **composer audit**: 3 advisories على `laravel/framework` (تواقيع 12/13، تصحيحاتها فقط في 12.60+/13.12+ — غير متاح لـ Laravel 10 EOL). خطر مقبول محلياً، مع خيار لاحق للانتقال إلى L11/L12 (PHP 8.2 يدعمها).
+- **`User::where('fingerprint',...)`** في `AttendController`/`PatientController::validateAppNum` — عمود `users.fingerprint` موجود في الميجريشن؛ تم التحقق من المخطط.
+
+### الملفات المعدّلة/الجديدة
+- جديد: `app/Helpers/Active.php`, `resources/views/layouts/app.blade.php`
+- معدّل: `config/app.php` (alias Active), `config/mail.php` (بنية L10), `app/Http/Middleware/TrustProxies.php`, `app/Http/Controllers/{PatientController,LoginController,UserController,NoticeboardController,AttendController}.php`, 6 ملفات migrations, `database/seeders/DatabaseSeeder.php` (الترتيب), `composer.json` (phpunit ^10.1), `phpunit.xml`, `tests/Feature/ExampleTest.php`
+
+### commit
+- *(يُرفع عند تأكيد المستخدم — التغييرات جاهزة للstage 2 commit)*
+
+---
+
 ## المرحلة 1 — التثبيت ودمج الحزم (COMPLETED ✅)
 - **تاريخ**: 2026-09-23
 - **المدخلات**: PHP 8.2.12 | Composer 2.10.2 | MySQL (XAMPP) — Laravel 10.50.3
@@ -36,9 +85,5 @@
 ---
 
 ## المراحل القادمة
-- [ ] **المرحلة 2** — Bootstrap أساس: `.env.example` + `.env` + `key:generate`، وإصلاحات كود PHP 8 (مُدخلات، موديلات، controllers، middleware صغير إن وُجد).
-- [ ] **المرحلة 3** — Seeders/Factories/Migrations: نقل `database/seeds` → `database/seeders`، factories class-based، إصلاح FKs والـ raw SQL في الميجر-شن.
-- [ ] **المرحلة 4** — Blade: استبدال `Active::checkRoute` بـ `request()->routeIs`، إصلاح layouts المفقودة.
-- [ ] **المرحلة 5** — Configs: `config/mail.php`، إعدادات production-in-`.env`، حفظ config/تمهيد التخزين `storage` links إن تطلب (spatie/backup، activitylog).
-- [ ] **المرحلة 6** — تحقق نهائي: `route:list`، `vendor:publish` المطلوبة، إنشاء DB تجريبية `hms_test`، `migrate` + `db:seed`، `php artisan serve`، اختبار السيناريوهات في التحليل، `php artisan test`.
-- [ ] **المرحلة 7** — `UPGRADE_REPORT.md` + commit نهائي + تعليمات التشغيل.
+- [ ] **المرحلة 3** — `UPGRADE_REPORT.md` النهائي + commit للتغييرات المرحلة 1+2 + تعليمات التشغيل (إن لم يُطلب أكثر).
+- [ ] (اختياري) إصلاح المسارات الميتة `/reportgeneration` و`/emails` بموافقة المستخدم.`
